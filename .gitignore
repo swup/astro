@@ -1,0 +1,10 @@
+.DS_Store
+*.DS_Store
+!.gitignore
+!.htaccess
+!web.config
+node_modules
+Thumbs.db
+.idea
+.vscode
+/dist

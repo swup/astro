@@ -1,0 +1,40 @@
+{
+  "name": "@swup/astro",
+  "description": "Smooth page transitions, smart preloading and more in Astro",
+  "version": "0.1.0",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swup/astro.git"
+  },
+  "keywords": [
+    "astro",
+    "astro-integration",
+    "swup",
+    "animation",
+    "transition"
+  ],
+  "bugs": "https://github.com/swup/astro/issues",
+  "homepage": "https://swup.js.org",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "astro-scripts build \"src/**/*.ts\" && tsc",
+    "build:ci": "astro-scripts build \"src/**/*.ts\"",
+    "dev": "astro-scripts dev \"src/**/*.ts\""
+  },
+  "peerDependencies": {
+    "swup": "^3.0.0"
+  },
+  "devDependencies": {
+    "astro": "^2.7.3"
+  }
+}
