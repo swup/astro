@@ -1,6 +1,15 @@
 import type { AstroIntegration } from 'astro';
 import { buildInitScript } from './script';
 
+export enum SwupTheme {
+	fade = 'fade',
+	slide = 'slide',
+	overlay = 'overlay',
+	none = ''
+};
+
+export const defaultTheme = SwupTheme.fade;
+
 export interface Options {
 	containers: string[],
 	animationClass: string,
@@ -14,7 +23,7 @@ export interface Options {
 	reloadScripts: boolean,
 	updateBodyClass: boolean,
 	updateHead: boolean,
-	theme: 'fade' | 'slide' | 'overlay' | false
+	theme: SwupTheme | false
 };
 
 export default function createPlugin(options?: Options): AstroIntegration {
