@@ -19,7 +19,7 @@ export function buildInitScript(options?: Options): string {
 		theme = 'fade'
 	} = options || {};
 
-  const hasRoutes = Array.isArray(routes) && routes.length > 0;
+	const hasRoutes = Array.isArray(routes) && routes.length > 0;
 
 	const imports = [
 		`import Swup from 'swup';`,
@@ -38,28 +38,29 @@ export function buildInitScript(options?: Options): string {
 	].filter(Boolean).join('\n');
 
 	const animationSelector = `[class*="${animationClass}"]`;
+	const mainElement = containers[0];
 
 	const script = `
 		${imports}
-    const swup = new Swup({
-      animationSelector: ${JSON.stringify(animationSelector)},
-      containers: ${JSON.stringify(containers)},
-      cache: ${JSON.stringify(cache)},
-      plugins: [
-        ${debug ? `new SwupDebugPlugin(),` : ''}
-        ${accessibility ? `new SwupA11yPlugin(),` : ''}
-        ${preload ? `new SwupPreloadPlugin(),` : ''}
-        ${progress ? `new SwupProgressPlugin(),` : ''}
-        ${smoothScrolling ? `new SwupScrollPlugin(),` : ''}
-        ${reloadScripts ? `new SwupScriptsPlugin(),` : ''}
-        ${updateBodyClass ? `new SwupBodyClassPlugin(),` : ''}
-        ${updateHead ? `new SwupHeadPlugin(),` : ''}
-        ${hasRoutes ? `new SwupRouteNamePlugin({ routes: ${JSON.stringify(routes)} }),` : ''}
-        ${theme === 'fade' ? `new SwupFadeTheme(),` : ''}
-        ${theme === 'slide' ? `new SwupSlideTheme(),` : ''}
-        ${theme === 'overlay' ? `new SwupOverlayTheme(),` : ''}
-      ]
-    });
+		const swup = new Swup({
+			animationSelector: ${JSON.stringify(animationSelector)},
+			containers: ${JSON.stringify(containers)},
+			cache: ${JSON.stringify(cache)},
+			plugins: [
+				${debug ? `new SwupDebugPlugin(),` : ''}
+				${accessibility ? `new SwupA11yPlugin(),` : ''}
+				${preload ? `new SwupPreloadPlugin(),` : ''}
+				${progress ? `new SwupProgressPlugin(),` : ''}
+				${smoothScrolling ? `new SwupScrollPlugin(),` : ''}
+				${reloadScripts ? `new SwupScriptsPlugin(),` : ''}
+				${updateBodyClass ? `new SwupBodyClassPlugin(),` : ''}
+				${updateHead ? `new SwupHeadPlugin(),` : ''}
+				${hasRoutes ? `new SwupRouteNamePlugin({ routes: ${JSON.stringify(routes)} }),` : ''}
+				${theme === 'fade' ? `new SwupFadeTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
+				${theme === 'slide' ? `new SwupSlideTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
+				${theme === 'overlay' ? `new SwupOverlayTheme(),` : ''}
+			]
+		});
 	`;
 
 	return script.trim();
