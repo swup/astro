@@ -14,7 +14,7 @@ export function buildInitScript(options?: Options): string {
 		routes = false,
 		smoothScrolling = false,
 		reloadScripts = false,
-		updateBodyClass = false,
+		updateBodyClass = true,
 		updateHead = true,
 		theme = 'fade'
 	} = options || {};
