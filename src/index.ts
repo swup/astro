@@ -24,7 +24,7 @@ export default function createPlugin(options?: Options): AstroIntegration {
 			'astro:config:setup': ({ injectScript }) => {
 				const script = buildInitScript(options);
 				injectScript('page', script);
-			},
-		},
+			}
+		}
 	};
 }

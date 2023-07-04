@@ -19,6 +19,8 @@ export function buildInitScript(options?: Options): string {
 		theme = 'fade'
 	} = options || {};
 
+  const hasRoutes = Array.isArray(routes) && routes.length > 0;
+
 	const imports = [
 		`import Swup from 'swup';`,
 		debug ? `import SwupDebugPlugin from '@swup/debug-plugin';` : '',
@@ -29,7 +31,7 @@ export function buildInitScript(options?: Options): string {
 		reloadScripts ? `import SwupScriptsPlugin from '@swup/scripts-plugin';` : '',
 		updateBodyClass ? `import SwupBodyClassPlugin from '@swup/body-class-plugin';` : '',
 		updateHead ? `import SwupHeadPlugin from '@swup/head-plugin';` : '',
-		routes ? `import SwupRouteNamePlugin from '@swup/route-name-plugin';` : '',
+		hasRoutes ? `import SwupRouteNamePlugin from '@swup/route-name-plugin';` : '',
 		theme === 'fade' ? `import SwupFadeTheme from '@swup/fade-theme';` : '',
 		theme === 'slide' ? `import SwupSlideTheme from '@swup/slide-theme';` : '',
 		theme === 'overlay' ? `import SwupOverlayTheme from '@swup/overlay-theme';` : '',
@@ -37,14 +39,27 @@ export function buildInitScript(options?: Options): string {
 
 	const animationSelector = `[class*="${animationClass}"]`;
 
-	const swupOptions = {
-		animationSelector,
-		containers,
-		cache
-	};
-
 	const script = `
-		${imports} const swup = new Swup(${JSON.stringify(swupOptions)});
+		${imports}
+    const swup = new Swup({
+      animationSelector: ${JSON.stringify(animationSelector)},
+      containers: ${JSON.stringify(containers)},
+      cache: ${JSON.stringify(cache)},
+      plugins: [
+        ${debug ? `new SwupDebugPlugin(),` : ''}
+        ${accessibility ? `new SwupA11yPlugin(),` : ''}
+        ${preload ? `new SwupPreloadPlugin(),` : ''}
+        ${progress ? `new SwupProgressPlugin(),` : ''}
+        ${smoothScrolling ? `new SwupScrollPlugin(),` : ''}
+        ${reloadScripts ? `new SwupScriptsPlugin(),` : ''}
+        ${updateBodyClass ? `new SwupBodyClassPlugin(),` : ''}
+        ${updateHead ? `new SwupHeadPlugin(),` : ''}
+        ${hasRoutes ? `new SwupRouteNamePlugin({ routes: ${JSON.stringify(routes)} }),` : ''}
+        ${theme === 'fade' ? `new SwupFadeTheme(),` : ''}
+        ${theme === 'slide' ? `new SwupSlideTheme(),` : ''}
+        ${theme === 'overlay' ? `new SwupOverlayTheme(),` : ''}
+      ]
+    });
 	`;
 
 	return script.trim();
