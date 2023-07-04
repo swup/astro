@@ -21,46 +21,21 @@ Additionally, it provides lots of other quality-of-life improvements like **cach
 
 ## Installation
 
-### Quick Install
-
-The `astro add` command-line tool automates the installation for you. Run one of the following commands in a new terminal window. (If you aren't sure which package manager you're using, run the first command.) Then, follow the prompts, and type `y` in the terminal (meaning `yes`) for each one.
-
-```sh
-# Using NPM
-npx astro add swup
-# Using Yarn
-yarn astro add swup
-# Using PNPM
-pnpm astro add swup
-```
-
-If you run into any issues, check out the [Troubleshooting](#troubleshooting) section or try
-the manual installation steps below.
-
-### Manual Install
-
-First, install the `@swup/astro` package using your package manager. If you're using npm or aren't sure, run this in the terminal:
+First, install the `@swup/astro` package using your package manager. If you're using npm or
+aren't sure, run this in the terminal:
 
 ```sh
 npm install @swup/astro
 ```
 
-Most package managers will install associated peer dependencies as well. However, if you see a "Cannot find package 'swup'" (or similar) warning when you start up Astro, you'll need to manually install swup yourself:
-
-```sh
-npm install swup
-```
-
 Then, apply this integration to your `astro.config.*` file using the `integrations` property:
 
 ```js ins={3} "swup()"
-// astro.config.mjs
 import { defineConfig } from 'astro/config';
 import swup from '@swup/astro';
 
 export default defineConfig({
-  // ...
-  integrations: [swup()],
+  integrations: [swup()]
 });
 ```
 
@@ -79,9 +54,6 @@ check the [Astro Integration Documentation](https://docs.astro.build/en/guides/i
 for more on integrations.
 
 ## Limitations
-
-The swup integration does not give you control over how the script is loaded or initialized. If you
-require this control, consider [installing and using swup manually](https://swup.js.org/getting-started/installation/).
 
 **It is not currently possible to add custom plugins or hooks when using this component.** If you
 need this level of granularity, consider following [the manual swup setup](https://swup.js.org/getting-started/installation/) instead:
@@ -130,7 +102,7 @@ export default defineConfig({
 
 The content containers to be replaced on page visits. Usually the `<main>` element with the content
 of the page, but can include any other elements that are present across all pages.
-Defaults to a single container of id #swup.
+Defaults to a single container of id `#swup`.
 
 **Note**: Only elements **inside** of the `body` tag are supported.
 
