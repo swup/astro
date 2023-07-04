@@ -86,22 +86,214 @@ require this control, consider [installing and using swup manually](https://swup
 **It is not currently possible to add custom plugins or hooks when using this component.** If you
 need this level of granularity, consider following [the manual swup setup](https://swup.js.org/getting-started/installation/) instead:
 
-```js title="src/pages/index.astro"
+```js
 <script>
   import Swup from 'swup';
-  import SwupFormsPlugin from '@swup/forms-plugin';
-
+  import SwupPreloadPlugin from '@swup/preload-plugin';
   const swup = new Swup({
-    plugins: [new SwupFormsPlugin()]
+    plugins: [new SwupPreloadPlugin()]
   });
-
-  swup.hooks.on('transitionStart', () => {});
 </script>
 ```
 
 ## Configuration
 
-TO-DO
+The integration has its own options for enabling and fine-tuning swup features. Change these in the
+`astro.config.*` file which is where your project’s integration settings live.
+
+```js
+import { defineConfig } from 'astro/config';
+import swup from '@swup/astro';
+
+export default defineConfig({
+  integrations: [
+    swup({
+      containers: ['#swup'],
+      animationClass: 'transition-',
+      cache: true,
+      debug: false,
+      accessibility: true,
+      preload: true,
+      progress: false,
+      routes: false,
+      smoothScrolling: false,
+      reloadScripts: false,
+      updateBodyClass: false,
+      updateHead: true,
+      theme: 'fade'
+    })
+  ]
+});
+```
+
+### config.containers
+
+The content containers to be replaced on page visits. Usually the `<main>` element with the content
+of the page, but can include any other elements that are present across all pages.
+Defaults to a single container of id #swup.
+
+**Note**: Only elements **inside** of the `body` tag are supported.
+
+```js
+{
+  containers: ['#main', '#nav']
+}
+```
+
+### config.cache
+
+The built-in cache keeps previously loaded pages in memory. This improves speed but can be disabled
+for highly dynamic sites that need up-to-date responses on each request.
+
+```js
+{
+  cache: false
+}
+```
+
+### config.preload
+
+Enable smart preloading. Will fetch a page in the background when hovering a link. Also prefetches
+all pages with a `[data-swup-preload]` attribute. Useful for main navigations to ensure all menu
+items load instantly.
+
+```js
+{
+  preload: true
+}
+```
+
+### config.progress
+
+Display a progress bar for all requests taking longer than ~300ms.
+
+```js
+{
+  progress: true
+}
+```
+
+The progress bar has a class name of `swup-progress-bar` you can use for styling.
+
+```css
+.swup-progress-bar {
+  height: 4px;
+  background-color: blue;
+}
+```
+
+### config.routes
+
+Use path and route names to allow choosing between animations. Given a list of URL patterns,
+uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) to identify named routes and
+adds them as classnames to use for styling transitions, e.g. `from-route-home` or `to-route-project`.
+
+```js
+{
+  routes: [
+    { name: 'home', path: '/:lang?' },
+    { name: 'projects', path: '/:lang/projects' },
+    { name: 'project', path: '/:lang/project/:slug' },
+    { name: 'any', path: '(.*)' }
+  ]
+}
+```
+
+Navigating from `/en/` to `/en/project/some-project/`:
+
+```html
+<html class="is-animating from-route-home to-route-project">
+```
+
+### config.accessibility
+
+Enhance accessibility for screen readers by announcing page visits and focussing the newly updated
+content after page visits.
+
+```js
+{
+  accessibility: true
+}
+```
+
+### config.debug
+
+Add debug output by swup and its plugins. Useful during development.
+
+```js
+{
+  debug: false
+}
+```
+
+### config.animationClass
+
+The class prefix for detecting transition timing. Swup will wait for all CSS transitions and
+keyframe animations to finish on these elements before swapping in the content of the new page.
+The default option will select all elements with class names beginning in `transition-`.
+
+```js
+{
+  animationClass: 'transition-'
+}
+```
+
+### config.updateBodyClass
+
+Update the body class after each page visit. Useful if you use tags on the body element for
+styling site sections.
+
+```js
+{
+  updateBodyClass: true
+}
+```
+
+### config.updateHead
+
+Update the contents of the `head` tag after each page visit. Useful if you have differing
+stylesheets per section of your site.
+
+```js
+{
+  updateHead: true
+}
+```
+
+### config.reloadScripts
+
+Re-run any `script` tags inside the `head` and `body` on every page view. Helpful as a last resort
+for sites with limited control over the included scripts. Beware: Running scripts without destroying
+previous ones can cause memory leaks and potentially break your page.
+
+```js
+{
+  reloadScripts: true
+}
+```
+
+### config.smoothScrolling
+
+Enable acceleration-based smooth scrolling, animate scroll positions between page visits and
+scrolling to anchors.
+
+```js
+{
+  smoothScrolling: true
+}
+```
+
+### config.theme
+
+Use one of swup's predefined themes to get started with smooth page transitions.
+
+Set to `false` if you want to define your own transition styles.
+
+```js
+{
+  theme: 'fade' | 'slide' | 'overlay' | false
+}
+```
 
 ## Examples
 
