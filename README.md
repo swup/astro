@@ -13,12 +13,11 @@ Enable smooth page transitions, smart preloading and more with this
 
 ## What is swup?
 
-Swup is a versatile and extensible page transition library for multi-page apps.
+Swup is a versatile and extensible **page transition library** for multi-page apps.
 It manages the complete page load lifecycle and smoothly transitions between the current and next page.
-Additionally, it provides lots of other quality-of-life improvements like caching, smart preloading,
-native browser history and enhanced accessibility. [Learn more about swup](https://swup.js.org/getting-started/)
-in the official docs.
-
+Additionally, it provides lots of other quality-of-life improvements like **caching**,
+**smart preloading**, native **browser history** and enhanced **accessibility**.
+[Learn more about swup](https://swup.js.org/getting-started/) in the official docs.
 
 ## Installation
 
@@ -69,10 +68,15 @@ export default defineConfig({
 
 Once the integration is installed, [swup](https://swup.js.org/) will handle the complete lifecycle
 of page visits by intercepting link clicks, loading the new page in the background, replacing the
-content and transitioning between the old and the new page. The necessary script is automatically
-added and enabled on every page of your website.
+content and transitioning between the old and the new page.
 
-Check the [Astro Integration Documentation](https://docs.astro.build/en/guides/integrations-guide/) for more on integrations.
+The necessary script is automatically added and enabled on every page of your website. Try
+navigating between different pages via links — you should no longer see browser refreshes and should
+find page requests passing through swup under the Network tab in your browser dev tools.
+
+Head to the [swup docs](https://swup.js.org) for all options and features available. You can also
+check the [Astro Integration Documentation](https://docs.astro.build/en/guides/integrations-guide/)
+for more on integrations.
 
 ## Limitations
 
