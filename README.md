@@ -21,14 +21,13 @@ Additionally, it provides lots of other quality-of-life improvements like **cach
 
 ## Installation
 
-First, install the `@swup/astro` package using your package manager. If you're using npm or
-aren't sure, run this in the terminal:
+First, install the `@swup/astro` package using your package manager.
 
 ```sh
 npm install @swup/astro
 ```
 
-Then, apply this integration to your `astro.config.*` file using the `integrations` property:
+Then, apply the integration to your `astro.config.*` file using the `integrations` property:
 
 ```js ins={3} "swup()"
 import { defineConfig } from 'astro/config';
