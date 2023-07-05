@@ -4,7 +4,12 @@
   "version": "0.1.0",
   "type": "module",
   "types": "./dist/index.d.ts",
-  "author": "",
+  "main": "./dist/index.js",
+  "author": {
+    "name": "Philipp Daun",
+    "email": "post@philippdaun.net",
+    "url": "https://philippdaun.net"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -12,29 +17,49 @@
   },
   "keywords": [
     "astro",
+    "astro-component",
     "astro-integration",
     "swup",
     "animation",
-    "transition"
+    "transition",
+    "css",
+    "performance"
   ],
   "bugs": "https://github.com/swup/astro/issues",
   "homepage": "https://swup.js.org",
   "exports": {
     ".": "./dist/index.js",
+    "./client": "./dist/client.js",
+    "./client/*": "./dist/client/*.js",
     "./package.json": "./package.json"
   },
   "files": [
+    "src",
     "dist"
   ],
   "scripts": {
-    "build": "astro-scripts build \"src/**/*.ts\" && tsc",
-    "build:ci": "astro-scripts build \"src/**/*.ts\"",
-    "dev": "astro-scripts dev \"src/**/*.ts\""
+    "build": "tsc",
+    "publish": "publish --access public",
+    "prepublish": "npm run build"
   },
-  "peerDependencies": {
+  "dependencies": {
+    "@swup/a11y-plugin": "^3.0.0",
+    "@swup/body-class-plugin": "^2.0.0",
+    "@swup/debug-plugin": "^3.0.0",
+    "@swup/fade-theme": "^1.0.0",
+    "@swup/forms-plugin": "^2.0.0",
+    "@swup/head-plugin": "^1.0.0",
+    "@swup/overlay-theme": "^1.0.0",
+    "@swup/preload-plugin": "^2.0.0",
+    "@swup/progress-plugin": "^2.0.0",
+    "@swup/route-name-plugin": "^3.0.0",
+    "@swup/scripts-plugin": "^1.0.0",
+    "@swup/scroll-plugin": "^2.0.0",
+    "@swup/slide-theme": "^1.0.0",
     "swup": "^3.0.0"
   },
   "devDependencies": {
-    "astro": "^2.7.3"
+    "astro": "^2.0.0",
+    "typescript": "^5.1.6"
   }
 }
