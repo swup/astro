@@ -54,7 +54,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 
 	// Create swup init code from requested features
 	return `
-		import { ${imports.join(', ')} } from '@swup/astro/client';
+		${imports.map(pckg => `import ${pckg} from '@swup/astro/client/${pckg}'`).join(';')}
 		const swup = new Swup({
 			animationSelector: ${JSON.stringify(animationSelector)},
 			containers: ${JSON.stringify(containers)},
