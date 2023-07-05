@@ -1,4 +1,4 @@
-import { Options, Theme } from './index';
+import { Theme, type Options } from './index';
 
 export function buildInitScript(options: Partial<Options> = {}): string {
 	let {
@@ -54,7 +54,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 
 	// Create swup init code from requested features
 	return `
-		import { ${imports.join(', ')} } from '@swup/astro';
+		import { ${imports.join(', ')} } from '@swup/astro/client';
 		const swup = new Swup({
 			animationSelector: ${JSON.stringify(animationSelector)},
 			containers: ${JSON.stringify(containers)},

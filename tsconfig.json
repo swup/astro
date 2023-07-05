@@ -1,7 +1,15 @@
 {
-  "extends": "astro/tsconfigs/base",
   "include": ["src"],
   "compilerOptions": {
-    "outDir": "./dist"
+    "declaration": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": true,
+    "allowJs": true,
+    "module": "ES2022",
+    "outDir": "./dist",
+    "target": "ES2021"
   }
 }

@@ -29,10 +29,11 @@
   "homepage": "https://swup.js.org",
   "exports": {
     ".": "./dist/index.js",
-    "./client": "./client.js",
+    "./client": "./dist/client.js",
     "./package.json": "./package.json"
   },
   "files": [
+    "src",
     "dist"
   ],
   "scripts": {

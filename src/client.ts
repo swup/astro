@@ -26,4 +26,4 @@ export {
   SwupFadeTheme,
   SwupSlideTheme,
   SwupOverlayTheme
-};
+}

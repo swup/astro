@@ -1,4 +1,5 @@
-import type { AstroIntegration } from 'astro';
+import { type AstroIntegration } from 'astro';
+
 import { buildInitScript } from './script';
 
 export interface Options {
@@ -15,13 +16,13 @@ export interface Options {
 	theme: Theme | false;
 	updateBodyClass: boolean;
 	updateHead: boolean;
-};
+}
 
 export enum Theme {
 	fade = 'fade',
 	slide = 'slide',
 	overlay = 'overlay'
-};
+}
 
 export interface Route {
 	name: string;
