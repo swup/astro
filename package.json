@@ -4,7 +4,11 @@
   "version": "0.1.0",
   "type": "module",
   "types": "./dist/index.d.ts",
-  "author": "",
+  "author": {
+    "name": "Philipp Daun",
+    "email": "daun@daun.ltd",
+    "url": "https://philippdaun.net"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
