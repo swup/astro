@@ -7,7 +7,7 @@
   "main": "./dist/index.js",
   "author": {
     "name": "Philipp Daun",
-    "email": "daun@daun.ltd",
+    "email": "post@philippdaun.net",
     "url": "https://philippdaun.net"
   },
   "license": "MIT",
@@ -17,10 +17,13 @@
   },
   "keywords": [
     "astro",
+    "astro-component",
     "astro-integration",
     "swup",
     "animation",
-    "transition"
+    "transition",
+    "css",
+    "performance"
   ],
   "bugs": "https://github.com/swup/astro/issues",
   "homepage": "https://swup.js.org",
