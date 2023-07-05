@@ -1,4 +1,4 @@
-import { Theme, type Options } from './index';
+import { Theme, type Options } from './index.js';
 
 export function buildInitScript(options: Partial<Options> = {}): string {
 	let {

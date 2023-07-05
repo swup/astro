@@ -1,6 +1,6 @@
 import { type AstroIntegration } from 'astro';
 
-import { buildInitScript } from './script';
+import { buildInitScript } from './script.js';
 
 export interface Options {
 	accessibility: boolean;
