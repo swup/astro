@@ -12,6 +12,12 @@ import SwupFadeTheme from '@swup/fade-theme';
 import SwupSlideTheme from '@swup/slide-theme';
 import SwupOverlayTheme from '@swup/overlay-theme';
 
+/**
+ * This would be great as a client script for dynamic importing.
+ * However, it seems Astro will always bundle the whole script. Hence, we're creating a single
+ * client package for each plugin and theme in the client/ subfolder for now.
+ * It works, but it's not pretty :(
+ */
 export {
   Swup,
   SwupDebugPlugin,
