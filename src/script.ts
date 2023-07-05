@@ -1,6 +1,6 @@
 import { Options, SwupTheme, defaultTheme } from './index';
 
-export function buildInitScript(options?: Options): string {
+export function buildInitScript(options?: Partial<Options>): string {
 	let {
 		containers = ['main'],
 		animationClass = 'transition-',
@@ -17,12 +17,16 @@ export function buildInitScript(options?: Options): string {
 		theme = defaultTheme
 	} = options || {};
 
-  const hasRoutes = Array.isArray(routes) && routes.length > 0;
-
+	// Validate options
+	const mainElement = containers[0];
+	const animationSelector = `[class*="${animationClass}"]`;
+	const hasRoutes = Array.isArray(routes) && routes.length > 0;
+	const hasTheme = theme && Object.values(SwupTheme).includes(theme);
 	if (!cache) {
 		preload = false;
 	}
 
+	// Create import statements from requested features
 	const imports = [
 		`import Swup from 'swup';`,
 		debug ? `import SwupDebugPlugin from '@swup/debug-plugin';` : '',
@@ -39,31 +43,28 @@ export function buildInitScript(options?: Options): string {
 		theme === SwupTheme.overlay ? `import SwupOverlayTheme from '@swup/overlay-theme';` : '',
 	].filter(Boolean).join('\n');
 
-	const animationSelector = `[class*="${animationClass}"]`;
-  const mainElement = containers[0];
-
-	const script = `
-		${imports}
-    const swup = new Swup({
-      animationSelector: ${JSON.stringify(animationSelector)},
-      containers: ${JSON.stringify(containers)},
-      cache: ${JSON.stringify(cache)},
-      plugins: [
-        ${debug ? `new SwupDebugPlugin(),` : ''}
-        ${accessibility ? `new SwupA11yPlugin(),` : ''}
-        ${preload ? `new SwupPreloadPlugin(),` : ''}
-        ${progress ? `new SwupProgressPlugin(),` : ''}
-        ${smoothScrolling ? `new SwupScrollPlugin(),` : ''}
-        ${reloadScripts ? `new SwupScriptsPlugin(),` : ''}
-        ${updateBodyClass ? `new SwupBodyClassPlugin(),` : ''}
-        ${updateHead ? `new SwupHeadPlugin(),` : ''}
-        ${hasRoutes ? `new SwupRouteNamePlugin({ routes: ${JSON.stringify(routes)} }),` : ''}
-        ${theme === SwupTheme.fade ? `new SwupFadeTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
-        ${theme === SwupTheme.slide ? `new SwupSlideTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
-        ${theme === SwupTheme.overlay ? `new SwupOverlayTheme(),` : ''}
-      ]
-    });
+	// Create swup init code from requested features
+	const init = `
+		const swup = new Swup({
+			animationSelector: ${JSON.stringify(animationSelector)},
+			containers: ${JSON.stringify(containers)},
+			cache: ${JSON.stringify(cache)},
+			plugins: [
+				${debug ? `new SwupDebugPlugin(),` : ''}
+				${accessibility ? `new SwupA11yPlugin(),` : ''}
+				${preload ? `new SwupPreloadPlugin(),` : ''}
+				${progress ? `new SwupProgressPlugin(),` : ''}
+				${smoothScrolling ? `new SwupScrollPlugin(),` : ''}
+				${reloadScripts ? `new SwupScriptsPlugin(),` : ''}
+				${updateBodyClass ? `new SwupBodyClassPlugin(),` : ''}
+				${updateHead ? `new SwupHeadPlugin(),` : ''}
+				${hasRoutes ? `new SwupRouteNamePlugin({ routes: ${JSON.stringify(routes)} }),` : ''}
+				${theme === SwupTheme.fade ? `new SwupFadeTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
+				${theme === SwupTheme.slide ? `new SwupSlideTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
+				${theme === SwupTheme.overlay ? `new SwupOverlayTheme(),` : ''}
+			]
+		});
 	`;
 
-	return script.trim();
+	return imports.trim() + init.trim();
 }

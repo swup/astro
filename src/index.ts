@@ -26,7 +26,7 @@ export interface Options {
 	theme: SwupTheme | false
 };
 
-export default function createPlugin(options?: Options): AstroIntegration {
+export default function createPlugin(options?: Partial<Options>): AstroIntegration {
 	return {
 		name: '@swup/astro',
 		hooks: {
