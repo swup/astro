@@ -1,32 +1,34 @@
 import type { AstroIntegration } from 'astro';
 import { buildInitScript } from './script';
 
-export enum SwupTheme {
+export interface Options {
+	accessibility: boolean;
+	animationClass: string | false;
+	cache: boolean;
+	containers: string[];
+	debug: boolean;
+	preload: boolean;
+	progress: boolean;
+	reloadScripts: boolean;
+	routes: true | false | Route[];
+	smoothScrolling: boolean;
+	theme: Theme | false;
+	updateBodyClass: boolean;
+	updateHead: boolean;
+};
+
+export enum Theme {
 	fade = 'fade',
 	slide = 'slide',
-	overlay = 'overlay',
-	none = ''
+	overlay = 'overlay'
 };
 
-export const defaultTheme = SwupTheme.fade;
+export interface Route {
+	name: string;
+	path: string | RegExp;
+}
 
-export interface Options {
-	containers: string[],
-	animationClass: string,
-	cache: boolean,
-	debug: boolean,
-	accessibility: boolean,
-	preload: boolean,
-	progress: boolean,
-	routes: false | any[],
-	smoothScrolling: boolean,
-	reloadScripts: boolean,
-	updateBodyClass: boolean,
-	updateHead: boolean,
-	theme: SwupTheme | false
-};
-
-export default function createPlugin(options?: Partial<Options>): AstroIntegration {
+export default function createPlugin(options: Partial<Options> = {}): AstroIntegration {
 	return {
 		name: '@swup/astro',
 		hooks: {

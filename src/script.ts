@@ -1,21 +1,21 @@
-import { Options, SwupTheme, defaultTheme } from './index';
+import { Options, Theme } from './index';
 
-export function buildInitScript(options?: Partial<Options>): string {
+export function buildInitScript(options: Partial<Options> = {}): string {
 	let {
-		containers = ['main'],
+		accessibility = true,
 		animationClass = 'transition-',
 		cache = true,
+		containers = ['main'],
 		debug = false,
-		accessibility = true,
 		preload = true,
 		progress = false,
+		reloadScripts = false,
 		routes = false,
 		smoothScrolling = false,
-		reloadScripts = false,
+		theme = 'fade',
 		updateBodyClass = true,
-		updateHead = true,
-		theme = defaultTheme
-	} = options || {};
+		updateHead = true
+	} = options;
 
 	// Validate options
 	const mainElement = containers[0];
