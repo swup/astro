@@ -63,9 +63,10 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 				${progress ? `new SwupProgressPlugin(),` : ''}
 				${routes ? `new SwupRouteNamePlugin({ routes: ${JSON.stringify(routes)}, paths: true }),` : ''}
 				${smoothScrolling ? `new SwupScrollPlugin(),` : ''}
-				${reloadScripts ? `new SwupScriptsPlugin(),` : ''}
 				${updateBodyClass ? `new SwupBodyClassPlugin(),` : ''}
-				${updateHead ? `new SwupHeadPlugin(),` : ''}
+				${updateHead ? `new SwupHeadPlugin({ awaitAssets: true }),` : ''}
+				${reloadScripts && updateHead ? `new SwupScriptsPlugin({ head: false }),` : ''}
+				${reloadScripts && !updateHead ? `new SwupScriptsPlugin(),` : ''}
 				${theme === Theme.fade ? `new SwupFadeTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
 				${theme === Theme.slide ? `new SwupSlideTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
 				${theme === Theme.overlay ? `new SwupOverlayTheme(),` : ''}
