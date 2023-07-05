@@ -20,10 +20,14 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 	// Validate options
 	const mainElement = containers[0];
 	const animationSelector = `[class*="${animationClass}"]`;
-	const hasRoutes = Array.isArray(routes) && routes.length > 0;
 	const hasTheme = theme && Object.values(SwupTheme).includes(theme);
 	if (!cache) {
 		preload = false;
+	}
+
+	// Allow routes boolean to enable path-name classes on body
+	if (routes === true) {
+		routes = [];
 	}
 
 	// Create import statements from requested features
@@ -37,10 +41,10 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		reloadScripts ? `import SwupScriptsPlugin from '@swup/scripts-plugin';` : '',
 		updateBodyClass ? `import SwupBodyClassPlugin from '@swup/body-class-plugin';` : '',
 		updateHead ? `import SwupHeadPlugin from '@swup/head-plugin';` : '',
-		hasRoutes ? `import SwupRouteNamePlugin from '@swup/route-name-plugin';` : '',
 		theme === SwupTheme.fade ? `import SwupFadeTheme from '@swup/fade-theme';` : '',
 		theme === SwupTheme.slide ? `import SwupSlideTheme from '@swup/slide-theme';` : '',
 		theme === SwupTheme.overlay ? `import SwupOverlayTheme from '@swup/overlay-theme';` : '',
+		routes ? `import SwupRouteNamePlugin from '@swup/route-name-plugin';` : '',
 	].filter(Boolean).join('\n');
 
 	// Create swup init code from requested features
@@ -54,11 +58,11 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 				${accessibility ? `new SwupA11yPlugin(),` : ''}
 				${preload ? `new SwupPreloadPlugin(),` : ''}
 				${progress ? `new SwupProgressPlugin(),` : ''}
+				${routes ? `new SwupRouteNamePlugin({ routes: ${JSON.stringify(routes)}, paths: true }),` : ''}
 				${smoothScrolling ? `new SwupScrollPlugin(),` : ''}
 				${reloadScripts ? `new SwupScriptsPlugin(),` : ''}
 				${updateBodyClass ? `new SwupBodyClassPlugin(),` : ''}
 				${updateHead ? `new SwupHeadPlugin(),` : ''}
-				${hasRoutes ? `new SwupRouteNamePlugin({ routes: ${JSON.stringify(routes)} }),` : ''}
 				${theme === SwupTheme.fade ? `new SwupFadeTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
 				${theme === SwupTheme.slide ? `new SwupSlideTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
 				${theme === SwupTheme.overlay ? `new SwupOverlayTheme(),` : ''}
