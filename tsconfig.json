@@ -1,0 +1,7 @@
+{
+  "extends": "astro/tsconfigs/base",
+  "include": ["src"],
+  "compilerOptions": {
+    "outDir": "./dist"
+  }
+}
