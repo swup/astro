@@ -34,24 +34,27 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 	}
 
 	// Create import statements from requested features
+	// This gets injected into the user's page, so we need to re-export Swup and all plugins
+	// from our own package so that package managers like pnpm can follow the imports correctly
 	const imports = [
-		`import Swup from 'swup';`,
-		debug ? `import SwupDebugPlugin from '@swup/debug-plugin';` : '',
-		accessibility ? `import SwupA11yPlugin from '@swup/a11y-plugin';` : '',
-		preload ? `import SwupPreloadPlugin from '@swup/preload-plugin';` : '',
-		progress ? `import SwupProgressPlugin from '@swup/progress-plugin';` : '',
-		smoothScrolling ? `import SwupScrollPlugin from '@swup/scroll-plugin';` : '',
-		reloadScripts ? `import SwupScriptsPlugin from '@swup/scripts-plugin';` : '',
-		updateBodyClass ? `import SwupBodyClassPlugin from '@swup/body-class-plugin';` : '',
-		updateHead ? `import SwupHeadPlugin from '@swup/head-plugin';` : '',
-		routes ? `import SwupRouteNamePlugin from '@swup/route-name-plugin';` : '',
-		theme === Theme.fade ? `import SwupFadeTheme from '@swup/fade-theme';` : '',
-		theme === Theme.slide ? `import SwupSlideTheme from '@swup/slide-theme';` : '',
-		theme === Theme.overlay ? `import SwupOverlayTheme from '@swup/overlay-theme';` : '',
-	].filter(Boolean).join('\n');
+		'Swup',
+		debug ? 'SwupDebugPlugin' : null,
+		accessibility ? 'SwupA11yPlugin' : null,
+		preload ? 'SwupPreloadPlugin' : null,
+		progress ? 'SwupProgressPlugin' : null,
+		smoothScrolling ? 'SwupScrollPlugin' : null,
+		reloadScripts ? 'SwupScriptsPlugin' : null,
+		updateBodyClass ? 'SwupBodyClassPlugin' : null,
+		updateHead ? 'SwupHeadPlugin' : null,
+		routes ? 'SwupRouteNamePlugin' : null,
+		theme === Theme.fade ? 'SwupFadeTheme' : null,
+		theme === Theme.slide ? 'SwupSlideTheme' : null,
+		theme === Theme.overlay ? 'SwupOverlayTheme' : null,
+	].filter(Boolean);
 
 	// Create swup init code from requested features
-	const init = `
+	return `
+		import { ${imports.join(', ')} } from '@swup/astro';
 		const swup = new Swup({
 			animationSelector: ${JSON.stringify(animationSelector)},
 			containers: ${JSON.stringify(containers)},
@@ -73,6 +76,4 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 			]
 		});
 	`;
-
-	return imports.trim() + init.trim();
 }
