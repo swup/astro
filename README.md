@@ -11,7 +11,7 @@ Enable smooth page transitions, smart preloading and more with this
 
 ## What is swup?
 
-Swup is a versatile and extensible **page transition library** for multi-page apps.
+[Swup](https://swup.js.org/) is a versatile and extensible **page transition library** for multi-page apps.
 It manages the complete page load lifecycle and smoothly transitions between the current and next page.
 Additionally, it provides lots of other quality-of-life improvements like **caching**,
 **smart preloading**, native **browser history** and enhanced **accessibility**.
@@ -39,37 +39,72 @@ export default defineConfig({
 
 ## Usage
 
-Once the integration is installed, [swup](https://swup.js.org/) will handle the complete lifecycle
-of page visits by intercepting link clicks, loading the new page in the background, replacing the
-content and transitioning between the old and the new page.
+Once the integration is installed, swup will handle and animate page visits.
+The necessary script is automatically added on every page of your website. Try navigating between
+different pages via links — you should no longer see browser refreshes and find page requests
+passing through swup under the Network tab in your browser dev tools.
 
-The necessary script is automatically added and enabled on every page of your website. Try
-navigating between different pages via links — you should no longer see browser refreshes and should
-find page requests passing through swup under the Network tab in your browser dev tools.
+The next step: fine-tune your setup by reading up on available [configuration](#configuration) flags.
 
-Head to the [swup docs](https://swup.js.org) for all options and features available. You can also
-check the [Astro Integration Documentation](https://docs.astro.build/en/guides/integrations-guide/)
-for more on integrations.
+### Content containers
 
-## Limitations
+If you're using semantic markup and your main content area is wrapped in a `main` tag, swup will
+work without modifications to your site. Should you wish to replace other content containers instead
+of or in addition to that, edit the [containers](#configcontainers) options.
 
-**It is not currently possible to add custom plugins or hooks when using this component.** If you
-need this level of granularity, consider following [the manual swup setup](https://swup.js.org/getting-started/installation/) instead:
+### Animations
+
+This integration enables swup's 'fade' theme for animated page transitions out of the box.
+
+### Custom animations
+
+If you want to write your own animation styles, disable the [theme](#configtheme) option. You then
+need to add an animation class to your animated elements and write the animation styles in CSS.
+See below for an example fade transition.
+Refer to the swup docs for a full [example setup](https://swup.js.org/getting-started/example/).
 
 ```js
-<script>
-  import Swup from 'swup';
-  import SwupPreloadPlugin from '@swup/preload-plugin';
-  const swup = new Swup({
-    plugins: [new SwupPreloadPlugin()]
-  });
-</script>
+export default defineConfig({
+  integrations: [
+    swup({ theme: false })
+  ]
+});
+```
+
+```html
+<main class="transition-fade">
+  <h1>Welcome</h1>
+</main>
+```
+
+```css
+.transition-fade {
+  transition: 0.4s;
+  opacity: 1;
+}
+html.is-animating .transition-fade {
+  opacity: 0;
+}
+```
+
+### Usage without animations
+
+If you don't need animated page transitions and just want to use swup for its preloading and caching
+features, that's fine too! In that case, disable the [theme](#configtheme) option and pass in a
+boolean `false` for the [animationClass](#configanimationclass) option as well.
+
+```js
+export default defineConfig({
+  integrations: [
+    swup({ theme: false, animationClass: false })
+  ]
+});
 ```
 
 ## Configuration
 
 The integration has its own options for enabling and fine-tuning swup features. Change these in the
-`astro.config.*` file which is where your project’s integration settings live.
+`astro.config.*` file which is where your project’s integration settings live. These are the defaults:
 
 ```js
 import { defineConfig } from 'astro/config';
@@ -78,35 +113,62 @@ import swup from '@swup/astro';
 export default defineConfig({
   integrations: [
     swup({
-      containers: ['#swup'],
+      theme: 'fade',
       animationClass: 'transition-',
+      containers: ['main'],
       cache: true,
-      debug: false,
-      accessibility: true,
       preload: true,
+      accessibility: true,
       progress: false,
       routes: false,
       smoothScrolling: false,
-      reloadScripts: false,
       updateBodyClass: false,
       updateHead: true,
-      theme: 'fade'
+      reloadScripts: false,
+      debug: false,
     })
   ]
 });
+```
+
+### config.theme
+
+Use one of swup's predefined themes to get started with smooth page transitions.
+
+Set to `false` if you want to define your own transition styles.
+
+```js
+{
+  theme: 'fade' | 'slide' | 'overlay' | false
+}
+```
+
+### config.animationClass
+
+If you're not using one of the provided themes, you will need this class for defining your own
+transition styles.
+
+The class prefix for detecting transition timing. Swup will wait for all CSS transitions and
+keyframe animations to finish on these elements before swapping in the content of the new page.
+The default option will select all elements with class names beginning in `transition-`.
+
+```js
+{
+  animationClass: 'transition-'
+}
 ```
 
 ### config.containers
 
 The content containers to be replaced on page visits. Usually the `<main>` element with the content
 of the page, but can include any other elements that are present across all pages.
-Defaults to a single container of id `#swup`.
+Defaults to the first `main` tag of the page.
 
 **Note**: Only elements **inside** of the `body` tag are supported.
 
 ```js
 {
-  containers: ['#main', '#nav']
+  containers: ['#content', '#nav']
 }
 ```
 
@@ -129,7 +191,18 @@ items load instantly.
 
 ```js
 {
-  preload: true
+  preload: false
+}
+```
+
+### config.accessibility
+
+Enhance accessibility for screen readers by announcing page visits and focussing the newly updated
+content after page visits.
+
+```js
+{
+  accessibility: true
 }
 ```
 
@@ -163,54 +236,31 @@ adds them as classnames to use for styling transitions, e.g. `from-route-home` o
   routes: [
     { name: 'home', path: '/:lang?' },
     { name: 'projects', path: '/:lang/projects' },
-    { name: 'project', path: '/:lang/project/:slug' },
-    { name: 'any', path: '(.*)' }
+    { name: 'project', path: '/:lang/project/:slug' }
   ]
 }
 ```
 
-Navigating from `/en/` to `/en/project/some-project/`:
+Navigating from `/en/` to `/en/project/some-project/` will add these classes:
 
 ```html
 <html class="is-animating from-route-home to-route-project">
 ```
 
-### config.accessibility
+### config.smoothScrolling
 
-Enhance accessibility for screen readers by announcing page visits and focussing the newly updated
-content after page visits.
-
-```js
-{
-  accessibility: true
-}
-```
-
-### config.debug
-
-Add debug output by swup and its plugins. Useful during development.
+Enable acceleration-based smooth scrolling, animated scroll positions between page visits and for
+anchor jump links.
 
 ```js
 {
-  debug: false
-}
-```
-
-### config.animationClass
-
-The class prefix for detecting transition timing. Swup will wait for all CSS transitions and
-keyframe animations to finish on these elements before swapping in the content of the new page.
-The default option will select all elements with class names beginning in `transition-`.
-
-```js
-{
-  animationClass: 'transition-'
+  smoothScrolling: true
 }
 ```
 
 ### config.updateBodyClass
 
-Update the body class after each page visit. Useful if you use tags on the body element for
+Update the body class after each page visit. Useful if you use classes on the body element for
 styling site sections.
 
 ```js
@@ -242,32 +292,31 @@ previous ones can cause memory leaks and potentially break your page.
 }
 ```
 
-### config.smoothScrolling
+### config.debug
 
-Enable acceleration-based smooth scrolling, animate scroll positions between page visits and
-scrolling to anchors.
-
-```js
-{
-  smoothScrolling: true
-}
-```
-
-### config.theme
-
-Use one of swup's predefined themes to get started with smooth page transitions.
-
-Set to `false` if you want to define your own transition styles.
+Add debug output by swup and its plugins to the browser console. Useful during development.
 
 ```js
 {
-  theme: 'fade' | 'slide' | 'overlay' | false
+  debug: false
 }
 ```
 
-## Examples
+## Limitations
 
-TO-DO
+**It is not currently possible to add custom plugins or hooks when using this component.** If you
+need this level of granularity, consider following
+[the manual swup setup](https://swup.js.org/getting-started/installation/) instead:
+
+```js
+<script>
+  import Swup from 'swup';
+  import SwupPreloadPlugin from '@swup/preload-plugin';
+  const swup = new Swup({
+    plugins: [new SwupPreloadPlugin()]
+  });
+</script>
+```
 
 ## Troubleshooting
 
@@ -279,7 +328,7 @@ You can also check the [Astro Integration Documentation](https://docs.astro.buil
 
 ## Contributing
 
-This package is maintained by the swup core team. You're welcome to submit an issue or PR!
+This package is maintained by the swup core team. You're welcome to submit an issue or PR.
 
 ## Changelog
 
