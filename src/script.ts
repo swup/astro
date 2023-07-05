@@ -17,11 +17,13 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		updateHead = true
 	} = options;
 
-	// Validate options
+	// Get main element for themes from first container
 	const mainElement = containers[0];
-	const hasTheme = theme && Object.values(SwupTheme).includes(theme);
+
 	// Build animation selector from animation class
 	const animationSelector = animationClass ? `[class*="${animationClass}"]` : false;
+
+	// Disable preload if cache is disabled
 	if (!cache) {
 		preload = false;
 	}
@@ -42,10 +44,10 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		reloadScripts ? `import SwupScriptsPlugin from '@swup/scripts-plugin';` : '',
 		updateBodyClass ? `import SwupBodyClassPlugin from '@swup/body-class-plugin';` : '',
 		updateHead ? `import SwupHeadPlugin from '@swup/head-plugin';` : '',
-		theme === SwupTheme.fade ? `import SwupFadeTheme from '@swup/fade-theme';` : '',
-		theme === SwupTheme.slide ? `import SwupSlideTheme from '@swup/slide-theme';` : '',
-		theme === SwupTheme.overlay ? `import SwupOverlayTheme from '@swup/overlay-theme';` : '',
 		routes ? `import SwupRouteNamePlugin from '@swup/route-name-plugin';` : '',
+		theme === Theme.fade ? `import SwupFadeTheme from '@swup/fade-theme';` : '',
+		theme === Theme.slide ? `import SwupSlideTheme from '@swup/slide-theme';` : '',
+		theme === Theme.overlay ? `import SwupOverlayTheme from '@swup/overlay-theme';` : '',
 	].filter(Boolean).join('\n');
 
 	// Create swup init code from requested features
@@ -64,9 +66,9 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 				${reloadScripts ? `new SwupScriptsPlugin(),` : ''}
 				${updateBodyClass ? `new SwupBodyClassPlugin(),` : ''}
 				${updateHead ? `new SwupHeadPlugin(),` : ''}
-				${theme === SwupTheme.fade ? `new SwupFadeTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
-				${theme === SwupTheme.slide ? `new SwupSlideTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
-				${theme === SwupTheme.overlay ? `new SwupOverlayTheme(),` : ''}
+				${theme === Theme.fade ? `new SwupFadeTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
+				${theme === Theme.slide ? `new SwupSlideTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
+				${theme === Theme.overlay ? `new SwupOverlayTheme(),` : ''}
 			]
 		});
 	`;
