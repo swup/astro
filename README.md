@@ -308,7 +308,7 @@ Add debug output by swup and its plugins to the browser console. Useful during d
 need this level of granularity, consider following
 [the manual swup setup](https://swup.js.org/getting-started/installation/) instead:
 
-```js
+```html
 <script>
   import Swup from 'swup';
   import SwupPreloadPlugin from '@swup/preload-plugin';
