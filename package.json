@@ -39,7 +39,6 @@
   ],
   "scripts": {
     "build": "tsc",
-    "publish": "publish --access public",
     "prepublish": "npm run build"
   },
   "dependencies": {
