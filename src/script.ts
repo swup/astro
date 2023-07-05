@@ -19,8 +19,9 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 
 	// Validate options
 	const mainElement = containers[0];
-	const animationSelector = `[class*="${animationClass}"]`;
 	const hasTheme = theme && Object.values(SwupTheme).includes(theme);
+	// Build animation selector from animation class
+	const animationSelector = animationClass ? `[class*="${animationClass}"]` : false;
 	if (!cache) {
 		preload = false;
 	}
