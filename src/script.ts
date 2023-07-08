@@ -14,7 +14,8 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		smoothScrolling = false,
 		theme = 'fade',
 		updateBodyClass = true,
-		updateHead = true
+		updateHead = true,
+		globalInstance = false
 	} = options;
 
 	// Get main element for themes from first container
@@ -75,5 +76,6 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 				${theme === Theme.overlay ? `new SwupOverlayTheme(),` : ''}
 			]
 		});
+		${globalInstance ? 'window.swup = swup;' : ''}
 	`;
 }
