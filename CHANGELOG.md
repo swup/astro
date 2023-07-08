@@ -1,5 +1,9 @@
 # @swup/astro
 
+## 0.1.3
+
+- Provide global swup instance on window
+
 ## 0.1.2
 
 - Fully qualify imports, this time for real
