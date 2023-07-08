@@ -302,10 +302,34 @@ Add debug output by swup and its plugins to the browser console. Useful during d
 }
 ```
 
-## Limitations
+### config.globalInstance
 
-**It is not currently possible to add custom plugins or hooks when using this component.** If you
-need this level of granularity, consider following
+Store the initialized swup instance in `window.swup`. Useful if you need to add custom hooks or
+plugins.
+
+## Advanced usage
+
+### Access to the swup instance
+
+For more advanced usage like registering custom hook handlers or installing plugins, you need access
+to the swup instance itself. Enable the `globalInstance` option to have the swup instance available
+at `window.swup`. You can then use swup's API directly.
+
+```js
+{
+  globalInstance: true
+}
+```
+
+```html
+<script>
+  window.swup.hooks.on('pageView', () => console.log('New page opened'));
+</script>
+```
+
+### Control over the initialization
+
+If you need more granularity during the initilization process itself, consider following
 [the manual swup setup](https://swup.js.org/getting-started/installation/) instead:
 
 ```html

@@ -16,6 +16,7 @@ export interface Options {
 	theme: Theme | false;
 	updateBodyClass: boolean;
 	updateHead: boolean;
+	globalInstance: boolean;
 }
 
 export enum Theme {
