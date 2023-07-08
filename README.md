@@ -128,6 +128,7 @@ export default defineConfig({
       updateHead: true,
       reloadScripts: false,
       debug: false,
+      globalInstance: false,
     })
   ]
 });
@@ -300,7 +301,7 @@ Add debug output by swup and its plugins to the browser console. Useful during d
 
 ```js
 {
-  debug: false
+  debug: true
 }
 ```
 
@@ -309,23 +310,23 @@ Add debug output by swup and its plugins to the browser console. Useful during d
 Store the initialized swup instance in `window.swup`. Useful if you need to add custom hooks or
 plugins.
 
-## Advanced usage
-
-### Access to the swup instance
-
-For more advanced usage like registering custom hook handlers or installing plugins, you need access
-to the swup instance itself. Enable the `globalInstance` option to have the swup instance available
-at `window.swup`. You can then use swup's API directly.
-
 ```js
 {
   globalInstance: true
 }
 ```
 
+## Advanced usage
+
+### Access to the swup instance
+
+For more advanced usage like registering hook handlers or installing custom plugins, you need access
+to the swup instance itself. Enable the `globalInstance` option to have the swup instance available
+at `window.swup`. You can then use swup's API directly.
+
 ```html
 <script>
-  window.swup.hooks.on('pageView', () => console.log('New page opened'));
+  window.swup.use(new MyCustomSwupPlugin())
 </script>
 ```
 
