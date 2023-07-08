@@ -1,5 +1,9 @@
 # @swup/astro
 
+## 0.1.4
+
+- Update readme
+
 ## 0.1.3
 
 - Provide global swup instance on window
