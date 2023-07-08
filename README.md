@@ -1,5 +1,7 @@
 # @swup/astro
 
+**Make your site feel like a snappy single-page app — without any of the complexity.**
+
 Enable smooth page transitions, smart preloading and more with this
 [Astro](https://docs.astro.build/en/guides/integrations-guide/) integration for [swup](https://swup.js.org/).
 
@@ -13,8 +15,8 @@ Enable smooth page transitions, smart preloading and more with this
 
 [Swup](https://swup.js.org/) is a versatile and extensible **page transition library** for multi-page apps.
 It manages the complete page load lifecycle and smoothly transitions between the current and next page.
-Additionally, it provides lots of other quality-of-life improvements like **caching**,
-**smart preloading**, native **browser history** and enhanced **accessibility**.
+In addition, it offers many other quality-of-life improvements like **caching**, **smart preloading**,
+native browser history and enhanced **accessibility**.
 
 [Learn more about swup](https://swup.js.org/getting-started/) in the official docs.
 
