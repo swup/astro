@@ -14,9 +14,9 @@ Enable smooth page transitions, smart preloading and more with this
 ## What is swup?
 
 [Swup](https://swup.js.org/) is a versatile and extensible **page transition library** for multi-page apps.
-It manages the complete page load lifecycle and smoothly transitions between the current and next page.
+It manages the complete page load lifecycle and smoothly animates between the current and next page.
 In addition, it offers many other quality-of-life improvements like **caching**, **smart preloading**,
-native browser history and enhanced **accessibility**.
+native **browser history** and enhanced **accessibility**.
 
 [Learn more about swup](https://swup.js.org/getting-started/) in the official docs.
 
@@ -62,7 +62,7 @@ This integration enables swup's 'fade' theme for animated page transitions out o
 
 If you want to write your own animation styles, disable the [theme](#configtheme) option. You then
 need to add an animation class to your animated elements and write the animation styles in CSS.
-See below for an example fade transition.
+See below for an example fade animation.
 Refer to the swup docs for a full [example setup](https://swup.js.org/getting-started/example/).
 
 ```js
@@ -80,7 +80,7 @@ export default defineConfig({
 ```
 
 ```css
-.transition-fade {
+html.is-changing .transition-fade {
   transition: 0.4s;
   opacity: 1;
 }
@@ -136,9 +136,9 @@ export default defineConfig({
 
 ### config.theme
 
-Use one of swup's predefined themes to get started with smooth page transitions.
+Use one of swup's predefined themes to get started with animated page transitions.
 
-Set to `false` if you want to define your own transition styles.
+Set to `false` if you want to define your own animation styles.
 
 ```js
 {
@@ -149,9 +149,9 @@ Set to `false` if you want to define your own transition styles.
 ### config.animationClass
 
 If you're not using one of the provided themes, you will need this class for defining your own
-transition styles.
+animation styles.
 
-The class prefix for detecting transition timing. Swup will wait for all CSS transitions and
+The class prefix for detecting animation timing. Swup will wait for all CSS transitions and
 keyframe animations to finish on these elements before swapping in the content of the new page.
 The default option will select all elements with class names beginning in `transition-`.
 
@@ -232,7 +232,7 @@ The progress bar has a class name of `swup-progress-bar` you can use for styling
 
 Use path and route names to allow choosing between animations. Given a list of URL patterns,
 uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) to identify named routes and
-adds them as classnames to use for styling transitions, e.g. `from-route-home` or `to-route-project`.
+adds them as classnames to use for styling animations, e.g. `from-route-home` or `to-route-project`.
 
 ```js
 {
