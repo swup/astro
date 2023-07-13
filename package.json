@@ -32,6 +32,7 @@
     ".": "./dist/index.js",
     "./client": "./dist/client.js",
     "./client/*": "./dist/client/*.js",
+    "./idle": "./dist/idle.js",
     "./package.json": "./package.json"
   },
   "files": [

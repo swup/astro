@@ -128,6 +128,7 @@ export default defineConfig({
       updateHead: true,
       reloadScripts: false,
       debug: false,
+      loadOnIdle: true,
       globalInstance: false,
     })
   ]
@@ -302,6 +303,19 @@ Add debug output by swup and its plugins to the browser console. Useful during d
 ```js
 {
   debug: true
+}
+```
+
+### config.loadOnIdle
+
+Swup is a progressive enhancement and doesn't need to be loaded immediately. By default, this
+integration will only initialize swup when the browser is idle, after the document has finished
+loading. This improves first-load performance of the site. If for whatever reason you need to
+initialize swup immediately on load, set this option to `false`.
+
+```js
+{
+  loadOnIdle: true
 }
 ```
 

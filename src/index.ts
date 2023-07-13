@@ -8,6 +8,8 @@ export interface Options {
 	cache: boolean;
 	containers: string[];
 	debug: boolean;
+	globalInstance: boolean;
+	loadOnIdle: boolean;
 	preload: boolean;
 	progress: boolean;
 	reloadScripts: boolean;
@@ -16,7 +18,6 @@ export interface Options {
 	theme: Theme | false;
 	updateBodyClass: boolean;
 	updateHead: boolean;
-	globalInstance: boolean;
 }
 
 export enum Theme {
