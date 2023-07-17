@@ -54,12 +54,22 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		theme === Theme.overlay ? 'SwupOverlayTheme' : null,
 	].filter(Boolean);
 
-	// Create swup init code from requested features
-	return `
-		${imports.map(pckg => `import ${pckg} from '@swup/astro/client/${pckg}'`).join(';')}
-		import { onIdleAfterLoad } from '@swup/astro/idle';
+	// Create import statements
 
-		function initSwup() {
+	const staticImports = imports.map(pckg => `import ${pckg} from '@swup/astro/client/${pckg}'`).join('; ');
+	const dynamicImports = `
+		const moduleImports = await Promise.all([${imports.map(pckg => `import('@swup/astro/client/${pckg}')`).join(',')}]);
+		const [${imports.join(', ')}] = moduleImports.map((m) => m.default);
+	`;
+
+	// Create swup init code from requested features
+
+	return `
+		import { onIdleAfterLoad } from '@swup/astro/idle';
+		${!loadOnIdle ? staticImports : ''}
+
+		async function initSwup() {
+			${loadOnIdle ? dynamicImports : ''}
 			const swup = new Swup({
 				animationSelector: ${JSON.stringify(animationSelector)},
 				containers: ${JSON.stringify(containers)},
