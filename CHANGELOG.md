@@ -1,5 +1,13 @@
 # @swup/astro
 
+## 0.1.6
+
+- Initialize swup on idle after load
+
+## 0.1.5
+
+- Update readme
+
 ## 0.1.4
 
 - Update readme
