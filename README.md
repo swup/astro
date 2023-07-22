@@ -337,6 +337,14 @@ For more advanced usage like registering hook handlers or installing custom plug
 to the swup instance itself. Enable the `globalInstance` option to have the swup instance available
 at `window.swup`. You can then use swup's API directly.
 
+```js
+export default defineConfig({
+  integrations: [
+    swup({ globalInstance: true })
+  ]
+});
+```
+
 ```html
 <script>
   window.swup.use(new MyCustomSwupPlugin())
