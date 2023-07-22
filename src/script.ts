@@ -11,7 +11,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		loadOnIdle = true,
 		preload = true,
 		progress = false,
-		reloadScripts = false,
+		reloadScripts = true,
 		routes = false,
 		smoothScrolling = true,
 		theme = 'fade',
@@ -83,8 +83,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 					${smoothScrolling ? `new SwupScrollPlugin(),` : ''}
 					${updateBodyClass ? `new SwupBodyClassPlugin(),` : ''}
 					${updateHead ? `new SwupHeadPlugin({ awaitAssets: true }),` : ''}
-					${reloadScripts && updateHead ? `new SwupScriptsPlugin({ head: false }),` : ''}
-					${reloadScripts && !updateHead ? `new SwupScriptsPlugin(),` : ''}
+					${reloadScripts ? `new SwupScriptsPlugin(),` : ''}
 					${theme === Theme.fade ? `new SwupFadeTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
 					${theme === Theme.slide ? `new SwupSlideTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
 					${theme === Theme.overlay ? `new SwupOverlayTheme(),` : ''}

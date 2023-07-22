@@ -126,7 +126,7 @@ export default defineConfig({
       smoothScrolling: true,
       updateBodyClass: false,
       updateHead: true,
-      reloadScripts: false,
+      reloadScripts: true,
       debug: false,
       loadOnIdle: true,
       globalInstance: false,
