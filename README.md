@@ -8,7 +8,6 @@ Enable smooth page transitions, smart preloading and more with this
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
-- [Examples](#examples)
 - [Troubleshooting](#troubleshooting)
 
 ## What is swup?
