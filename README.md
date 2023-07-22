@@ -123,7 +123,7 @@ export default defineConfig({
       accessibility: true,
       progress: false,
       routes: false,
-      smoothScrolling: false,
+      smoothScrolling: true,
       updateBodyClass: false,
       updateHead: true,
       reloadScripts: false,
