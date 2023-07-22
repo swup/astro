@@ -1,6 +1,6 @@
 # @swup/astro
 
-## 0.1.7
+## 0.2.0
 
 - Reload scripts by default
 - Enable scroll plugin by default

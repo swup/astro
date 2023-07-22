@@ -1,7 +1,7 @@
 {
   "name": "@swup/astro",
   "description": "Smooth page transitions, smart preloading and more in Astro",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "type": "module",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
