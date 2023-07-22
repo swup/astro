@@ -1,5 +1,10 @@
 # @swup/astro
 
+## 0.1.7
+
+- Reload scripts by default
+- Enable scroll plugin by default
+
 ## 0.1.6
 
 - Initialize swup on idle after load
