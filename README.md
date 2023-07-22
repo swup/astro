@@ -354,14 +354,21 @@ export default defineConfig({
 ### Control over the initialization
 
 If you need more granularity during the initilization process itself, consider following
-[the manual swup setup](https://swup.js.org/getting-started/installation/) instead:
+[the manual swup setup](https://swup.js.org/getting-started/installation/) instead. As a minimal
+requirement, you should install the head plugin and the scripts plugin so that client-side
+components are hydrated correctly.
 
 ```html
+<!-- Layout.astro or another global file -->
 <script>
   import Swup from 'swup';
-  import SwupPreloadPlugin from '@swup/preload-plugin';
+  import SwupHeadPlugin from '@swup/head-plugin';
+  import SwupScriptsPlugin from '@swup/scripts-plugin';
   const swup = new Swup({
-    plugins: [new SwupPreloadPlugin()]
+    plugins: [
+      new SwupHeadPlugin(),
+      new SwupScriptsPlugin()
+    ]
   });
 </script>
 ```
