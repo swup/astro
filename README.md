@@ -348,6 +348,7 @@ export default defineConfig({
 ```html
 <script>
   window.swup.use(new MyCustomSwupPlugin())
+  window.swup.hooks.on('page:view', () => {})
 </script>
 ```
 
