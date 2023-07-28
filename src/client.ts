@@ -3,6 +3,7 @@ import SwupA11yPlugin from '@swup/a11y-plugin';
 import SwupBodyClassPlugin from '@swup/body-class-plugin';
 import SwupDebugPlugin from '@swup/debug-plugin';
 import SwupFadeTheme from '@swup/fade-theme';
+import SwupFormsPlugin from '@swup/forms-plugin';
 import SwupHeadPlugin from '@swup/head-plugin';
 import SwupOverlayTheme from '@swup/overlay-theme';
 import SwupPreloadPlugin from '@swup/preload-plugin';
@@ -24,6 +25,7 @@ export {
   SwupBodyClassPlugin,
   SwupDebugPlugin,
   SwupFadeTheme,
+  SwupFormsPlugin,
   SwupHeadPlugin,
   SwupOverlayTheme,
   SwupPreloadPlugin,

@@ -8,6 +8,7 @@ export interface Options {
 	cache: boolean;
 	containers: string[];
 	debug: boolean;
+	forms: boolean;
 	globalInstance: boolean;
 	loadOnIdle: boolean;
 	preload: boolean;

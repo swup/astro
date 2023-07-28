@@ -120,6 +120,7 @@ export default defineConfig({
       cache: true,
       preload: true,
       accessibility: true,
+      forms: false,
       progress: false,
       routes: false,
       smoothScrolling: true,
@@ -206,6 +207,20 @@ content after page visits.
 ```js
 {
   accessibility: true
+}
+```
+
+### config.forms
+
+If you want swup to handle form submissions as well, enable this option. Note: swup handles
+reasonable scenarios like search or contact forms. For complex requirements like file uploads or
+custom serialization, it is recommended to use the swup API directly.
+
+To disable swup for specific forms, add a `data-no-swup` attribute on the form element.
+
+```js
+{
+  forms: true
 }
 ```
 

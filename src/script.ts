@@ -7,6 +7,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		cache = true,
 		containers = ['main'],
 		debug = false,
+		forms = false,
 		globalInstance = false,
 		loadOnIdle = true,
 		preload = true,
@@ -42,6 +43,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		'Swup',
 		debug ? 'SwupDebugPlugin' : null,
 		accessibility ? 'SwupA11yPlugin' : null,
+		forms ? 'SwupFormsPlugin' : null,
 		preload ? 'SwupPreloadPlugin' : null,
 		progress ? 'SwupProgressPlugin' : null,
 		smoothScrolling ? 'SwupScrollPlugin' : null,
@@ -77,6 +79,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 				plugins: [
 					${debug ? `new SwupDebugPlugin(),` : ''}
 					${accessibility ? `new SwupA11yPlugin(),` : ''}
+					${forms ? `new SwupFormsPlugin({ formSelector: 'form' }),` : ''}
 					${preload ? `new SwupPreloadPlugin(),` : ''}
 					${progress ? `new SwupProgressPlugin(),` : ''}
 					${routes ? `new SwupRouteNamePlugin({ routes: ${JSON.stringify(routes)}, paths: true }),` : ''}
