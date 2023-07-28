@@ -41,7 +41,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@swup/a11y-plugin": "^4.0.0",
