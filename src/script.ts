@@ -10,6 +10,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		forms = false,
 		globalInstance = false,
 		loadOnIdle = true,
+		parallel = false,
 		preload = true,
 		progress = false,
 		reloadScripts = true,
@@ -36,6 +37,11 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		routes = [];
 	}
 
+	// Allow parallel boolean to enable parallel animations on all containers
+	if (parallel === true) {
+		parallel = [];
+	}
+
 	// Create import statements from requested features
 	// This gets injected into the user's page, so we need to re-export Swup and all plugins
 	// from our own package so that package managers like pnpm can follow the imports correctly
@@ -47,6 +53,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		preload ? 'SwupPreloadPlugin' : null,
 		progress ? 'SwupProgressPlugin' : null,
 		smoothScrolling ? 'SwupScrollPlugin' : null,
+		parallel ? 'SwupParallelPlugin' : null,
 		reloadScripts ? 'SwupScriptsPlugin' : null,
 		updateBodyClass ? 'SwupBodyClassPlugin' : null,
 		updateHead ? 'SwupHeadPlugin' : null,
@@ -84,6 +91,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 					${progress ? `new SwupProgressPlugin(),` : ''}
 					${routes ? `new SwupRouteNamePlugin({ routes: ${JSON.stringify(routes)}, paths: true }),` : ''}
 					${smoothScrolling ? `new SwupScrollPlugin(),` : ''}
+					${parallel ? `new SwupParallelPlugin({ containers: ${JSON.stringify(parallel)} }),` : ''}
 					${updateBodyClass ? `new SwupBodyClassPlugin(),` : ''}
 					${updateHead ? `new SwupHeadPlugin({ awaitAssets: true }),` : ''}
 					${reloadScripts ? `new SwupScriptsPlugin(),` : ''}

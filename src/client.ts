@@ -6,6 +6,7 @@ import SwupFadeTheme from '@swup/fade-theme';
 import SwupFormsPlugin from '@swup/forms-plugin';
 import SwupHeadPlugin from '@swup/head-plugin';
 import SwupOverlayTheme from '@swup/overlay-theme';
+import SwupParallelPlugin from '@swup/parallel-plugin';
 import SwupPreloadPlugin from '@swup/preload-plugin';
 import SwupProgressPlugin from '@swup/progress-plugin';
 import SwupRouteNamePlugin from '@swup/route-name-plugin';
@@ -28,6 +29,7 @@ export {
   SwupFormsPlugin,
   SwupHeadPlugin,
   SwupOverlayTheme,
+  SwupParallelPlugin,
   SwupPreloadPlugin,
   SwupProgressPlugin,
   SwupRouteNamePlugin,

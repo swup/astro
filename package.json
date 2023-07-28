@@ -51,6 +51,7 @@
     "@swup/forms-plugin": "^3.0.0",
     "@swup/head-plugin": "^2.0.0",
     "@swup/overlay-theme": "^2.0.0",
+    "@swup/parallel-plugin": "^0.1.1",
     "@swup/preload-plugin": "^3.0.0",
     "@swup/progress-plugin": "^3.0.0",
     "@swup/route-name-plugin": "^4.0.0",
