@@ -120,6 +120,8 @@ export default defineConfig({
       cache: true,
       preload: true,
       accessibility: true,
+      forms: false,
+      parallel: false,
       progress: false,
       routes: false,
       smoothScrolling: true,
@@ -206,6 +208,46 @@ content after page visits.
 ```js
 {
   accessibility: true
+}
+```
+
+### config.forms
+
+If you want swup to handle form submissions as well, enable this option. Note: swup handles
+reasonable scenarios like search or contact forms. For complex requirements like file uploads or
+custom serialization, it is recommended to use the swup API directly.
+
+To disable swup for specific forms, add a `data-no-swup` attribute on the form element.
+
+```js
+{
+  forms: true
+}
+```
+
+### config.parallel
+
+Swup page transitions usually work in series: hide the current page, update the content, show the
+new page. If you  want to combine the leave/enter animations and keep the previous content visible
+during the animation, enable this option. Doing so will allow synchronous animations like overlays,
+crossfades, or slideshows.
+
+For details on the lifecycle and styling of parallel animations, check out the
+readme of swup's [Parallel Plugin](https://github.com/swup/parallel-plugin).
+
+```js
+{
+  parallel: true
+}
+```
+
+This will run all animations for all containers in parallel. If you only want to animate certain
+containers in parallel, pass an array of container selectors:
+
+```js
+{
+  containers: ['nav', 'main']
+  parallel: ['main']
 }
 ```
 
@@ -348,6 +390,7 @@ export default defineConfig({
 ```html
 <script>
   window.swup.use(new MyCustomSwupPlugin())
+  window.swup.hooks.on('page:view', () => {})
 </script>
 ```
 

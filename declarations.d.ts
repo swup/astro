@@ -1,1 +1,13 @@
-declare module '*';
+declare module '@swup/a11y-plugin';
+declare module '@swup/body-class-plugin';
+declare module '@swup/debug-plugin';
+declare module '@swup/fade-theme';
+declare module '@swup/forms-plugin';
+declare module '@swup/head-plugin';
+declare module '@swup/overlay-theme';
+declare module '@swup/preload-plugin';
+declare module '@swup/progress-plugin';
+declare module '@swup/route-name-plugin';
+declare module '@swup/scripts-plugin';
+declare module '@swup/scroll-plugin';
+declare module '@swup/slide-theme';
