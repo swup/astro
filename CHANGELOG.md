@@ -1,4 +1,10 @@
-# @swup/astro
+# Changelog
+
+## 1.0.0
+
+- Update to [swup 4](https://swup.js.org/announcements/swup-4/)
+- Add support for [form submissions](https://swup.js.org/plugins/forms-plugin/)
+- Add support for [parallel animations](https://swup.js.org/plugins/parallel-plugin/)
 
 ## 0.2.0
 
