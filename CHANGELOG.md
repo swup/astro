@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Update plugins
+
 ## 1.0.0
 
 - Update to [swup 4](https://swup.js.org/announcements/swup-4/)
