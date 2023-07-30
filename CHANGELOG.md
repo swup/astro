@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+- Update plugins
+
 ## 1.0.1
 
 - Update plugins
