@@ -394,6 +394,23 @@ export default defineConfig({
 </script>
 ```
 
+**Note**: The global instance might not be available immediately since swup is loaded when the
+browser is idle. In that case, you can listen for the `enable` event on the document.
+
+```html
+<script>
+  const setup = () => {
+    window.swup.use(new MyCustomSwupPlugin())
+    window.swup.hooks.on('page:view', () => {})
+  }
+  if (window.swup) {
+    setup()
+  } else {
+    document.addEventListener('swup:enable', setup)
+  }
+</script>
+```
+
 ### Control over the initialization
 
 If you need more granularity during the initilization process itself, consider following
