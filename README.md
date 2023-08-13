@@ -217,12 +217,35 @@ If you want swup to handle form submissions as well, enable this option. Note: s
 reasonable scenarios like search or contact forms. For complex requirements like file uploads or
 custom serialization, it is recommended to use the swup API directly.
 
-To disable swup for specific forms, add a `data-no-swup` attribute on the form element.
-
 ```js
 {
   forms: true
 }
+```
+
+Form submissions trigger normal swup navigations: they will animate and replace the content
+containers as on other visits. If you'd rather submit the form inline and only animate and
+update the form itself, add a `data-swup-inline-form` attribute and a unique `id` to the form:
+
+```html
+<form id="contact-form" class="transition-form" data-swup-inline-form>
+```
+
+The animation classes are then only added to the form itself:
+
+```css
+.transition-form.is-changing {
+  transition: opacity 200ms;
+}
+.transition-form.is-animating {
+  opacity: 0;
+}
+```
+
+To disable swup for specific forms, add a `data-no-swup` attribute on the form element:
+
+```html
+<form action="/" data-no-swup>
 ```
 
 ### config.parallel
