@@ -1,12 +1,18 @@
 # Changelog
 
+## 1.1.0
+
+- Add support for [inline form submissions](https://swup.js.org/plugins/forms-plugin/#inline-forms)
+- Add support for [preloading links entering the viewport](https://swup.js.org/plugins/preload-plugin/#preload-visible-links)
+- Update plugins for improved TypeScript support
+
 ## 1.0.2
 
-- Update plugins
+- Update plugins for improved TypeScript support
 
 ## 1.0.1
 
-- Update plugins
+- Update plugins for improved TypeScript support
 
 ## 1.0.0
 
