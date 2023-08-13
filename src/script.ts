@@ -11,7 +11,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		globalInstance = false,
 		loadOnIdle = true,
 		parallel = false,
-		preload = { hover: true, visible: false },
+		preload = true,
 		progress = false,
 		reloadScripts = true,
 		routes = false,
@@ -36,7 +36,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 	if (typeof preload === 'object') {
 		preload = { hover: preload.hover ?? true, visible: preload.visible ?? false };
 	} else {
-		preload = { hover: preload, visible: preload };
+		preload = { hover: preload, visible: false };
 	}
 	// Unset preload if all preload options are disabled
 	if (Object.values(preload).filter(Boolean).length === 0) {
