@@ -190,14 +190,42 @@ for highly dynamic sites that need up-to-date responses on each request.
 
 ### config.preload
 
-Enable smart preloading. Will fetch a page in the background when hovering a link. Also prefetches
-all pages with a `[data-swup-preload]` attribute. Useful for main navigations to ensure all menu
-items load instantly.
+Smart preloading, enabled by default. Pass in an object to enable or disable preloading features:
 
-```js
+```ts
 {
-  preload: false
+  preload: {
+    hover: true,
+    visible: false
+  }
 }
+```
+
+#### config.preload.hover
+
+Swup will preload links when they are hovered with a mouse, touched with a finger, or focused using
+the keyboard. Enabled by default.
+
+#### config.preload.visible
+
+Preload links as they enter the viewport. Not enabled by default, but recommended for a performance
+boost to static sites.
+
+#### Preloading links manually
+
+In addition to preloading links when interacting with them, you can mark links for preloading
+manually by applying a `data-swup-preload` attribute on the link, or a `data-swup-preload-all` on a
+common parent:
+
+```html
+<!-- preload a single link -->
+<a href="/about" data-swup-preload>About</a>
+
+<!-- preload all links in a container -->
+<nav data-swup-preload-all>
+  <a href="/about">About</a>
+  <a href="/contact">Contact</a>
+</nav>
 ```
 
 ### config.accessibility

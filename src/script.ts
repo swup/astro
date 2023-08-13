@@ -11,7 +11,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		globalInstance = false,
 		loadOnIdle = true,
 		parallel = false,
-		preload = true,
+		preload = { hover: true, visible: false },
 		progress = false,
 		reloadScripts = true,
 		routes = false,
@@ -29,6 +29,17 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 
 	// Disable preload if cache is disabled
 	if (!cache) {
+		preload = false;
+	}
+
+	// Allow preload boolean to enable per-feature configuration
+	if (typeof preload === 'object') {
+		preload = { hover: preload.hover ?? true, visible: preload.visible ?? false };
+	} else {
+		preload = { hover: preload, visible: preload };
+	}
+	// Unset preload if all preload options are disabled
+	if (Object.values(preload).filter(Boolean).length === 0) {
 		preload = false;
 	}
 
@@ -87,7 +98,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 					${debug ? `new SwupDebugPlugin(),` : ''}
 					${accessibility ? `new SwupA11yPlugin(),` : ''}
 					${forms ? `new SwupFormsPlugin({ formSelector: 'form' }),` : ''}
-					${preload ? `new SwupPreloadPlugin(),` : ''}
+					${preload ? `new SwupPreloadPlugin({ preloadHoveredLinks: ${JSON.stringify(preload.hover)}, preloadVisibleLinks: ${JSON.stringify(preload.visible)} }),` : ''}
 					${progress ? `new SwupProgressPlugin(),` : ''}
 					${routes ? `new SwupRouteNamePlugin({ routes: ${JSON.stringify(routes)}, paths: true }),` : ''}
 					${smoothScrolling ? `new SwupScrollPlugin(),` : ''}
