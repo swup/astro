@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- Update swup and plugins
+
 ## 1.1.0
 
 - Add support for [inline form submissions](https://swup.js.org/plugins/forms-plugin/#inline-forms)
