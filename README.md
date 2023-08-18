@@ -148,6 +148,14 @@ Set to `false` if you want to define your own animation styles.
 }
 ```
 
+Pass in an array with the theme name and an object to override specific theme options:
+
+```js
+{
+  theme: ['overlay', { direction: 'to-right' }]
+}
+```
+
 ### config.animationClass
 
 If you're not using one of the provided themes, you will need this class for defining your own
