@@ -17,7 +17,7 @@ export interface Options {
 	reloadScripts: boolean;
 	routes: true | false | Route[];
 	smoothScrolling: boolean;
-	theme: Theme | false;
+	theme: Theme | [Theme, ThemeOptions] | false;
 	updateBodyClass: boolean;
 	updateHead: boolean;
 }
@@ -27,6 +27,8 @@ export enum Theme {
 	slide = 'slide',
 	overlay = 'overlay'
 }
+
+export type ThemeOptions = Record<string, unknown>;
 
 export interface Route {
 	name: string;

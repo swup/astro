@@ -1,4 +1,4 @@
-import { Theme, type Options } from './index.js';
+import { Theme, type ThemeOptions, type Options } from './index.js';
 
 export function buildInitScript(options: Partial<Options> = {}): string {
 	let {
@@ -21,8 +21,17 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		updateHead = true,
 	} = options;
 
-	// Get main element for themes from first container
-	const mainElement = containers[0];
+	// Override main element for themes from first container
+	let themeOptions: ThemeOptions = {
+		mainElement: containers[0]
+	};
+
+	// Allow theme to be passed as an array with name + options
+	// e.g. ['overlay', { direction: 'to-right' }]
+	if (Array.isArray(theme)) {
+		themeOptions = { ...themeOptions, ...theme[1] };
+		theme = theme[0];
+	}
 
 	// Build animation selector from animation class
 	const animationSelector = animationClass ? `[class*="${animationClass}"]` : false;
@@ -106,9 +115,9 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 					${updateBodyClass ? `new SwupBodyClassPlugin(),` : ''}
 					${updateHead ? `new SwupHeadPlugin({ awaitAssets: true }),` : ''}
 					${reloadScripts ? `new SwupScriptsPlugin(),` : ''}
-					${theme === Theme.fade ? `new SwupFadeTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
-					${theme === Theme.slide ? `new SwupSlideTheme({ mainElement: ${JSON.stringify(mainElement)} }),` : ''}
-					${theme === Theme.overlay ? `new SwupOverlayTheme(),` : ''}
+					${theme === Theme.fade ? `new SwupFadeTheme(${JSON.stringify(themeOptions)}),` : ''}
+					${theme === Theme.slide ? `new SwupSlideTheme(${JSON.stringify(themeOptions)}),` : ''}
+					${theme === Theme.overlay ? `new SwupOverlayTheme(${JSON.stringify(themeOptions)}),` : ''}
 				]
 			});
 			${globalInstance ? 'window.swup = swup;' : ''}
