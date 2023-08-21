@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1
+
+- Update swup and plugins
+
 ## 1.2.0
 
 - Allow customizing theme options
