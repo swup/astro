@@ -5,6 +5,7 @@ import SwupDebugPlugin from '@swup/debug-plugin';
 import SwupFadeTheme from '@swup/fade-theme';
 import SwupFormsPlugin from '@swup/forms-plugin';
 import SwupHeadPlugin from '@swup/head-plugin';
+import SwupMorphPlugin from 'swup-morph-plugin';
 import SwupOverlayTheme from '@swup/overlay-theme';
 import SwupParallelPlugin from '@swup/parallel-plugin';
 import SwupPreloadPlugin from '@swup/preload-plugin';
@@ -28,6 +29,7 @@ export {
   SwupFadeTheme,
   SwupFormsPlugin,
   SwupHeadPlugin,
+  SwupMorphPlugin,
   SwupOverlayTheme,
   SwupParallelPlugin,
   SwupPreloadPlugin,

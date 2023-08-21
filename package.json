@@ -58,7 +58,8 @@
     "@swup/scripts-plugin": "^2.0.0",
     "@swup/scroll-plugin": "^3.0.0",
     "@swup/slide-theme": "^2.0.0",
-    "swup": "^4.0.0"
+    "swup": "^4.0.0",
+    "swup-morph-plugin": "^1.1.1"
   },
   "devDependencies": {
     "astro": "^2.0.0",
