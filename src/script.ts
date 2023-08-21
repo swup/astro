@@ -10,6 +10,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		forms = false,
 		globalInstance = false,
 		loadOnIdle = true,
+		morph = false,
 		parallel = false,
 		preload = true,
 		progress = false,
@@ -60,6 +61,11 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 	// Allow parallel boolean to enable parallel animations on all containers
 	if (parallel === true) {
 		parallel = [];
+	}
+
+	// Disable morph if no containers specified
+	if (!morph || !morph?.length) {
+		morph = false;
 	}
 
 	// Create import statements from requested features

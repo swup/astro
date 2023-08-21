@@ -12,6 +12,7 @@ export interface Options {
 	globalInstance: boolean;
 	loadOnIdle: boolean;
 	parallel: boolean | string[];
+	morph: string[] | false;
 	preload: boolean | { hover: boolean; visible: boolean };
 	progress: boolean;
 	reloadScripts: boolean;
