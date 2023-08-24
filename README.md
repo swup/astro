@@ -121,6 +121,7 @@ export default defineConfig({
       preload: true,
       accessibility: true,
       forms: false,
+      morph: false,
       parallel: false,
       progress: false,
       routes: false,
@@ -282,6 +283,23 @@ To disable swup for specific forms, add a `data-no-swup` attribute on the form e
 
 ```html
 <form action="/" data-no-swup>
+```
+
+### config.morph
+
+Morph certain containers into the new page without replacing them entirely. Uses
+[morphdom](https://github.com/patrick-steele-idem/morphdom) to only update the attributes,
+classnames and text content of elements that have changed, instead of replacing the whole
+container. This keeps any existing state such as event handlers and scroll positions.
+
+The prime use cases are headers and menus on multi-language sites: you might not want to swap these
+elements out with a transition on each page visit, however you'd still want to update any URLs,
+labels or classnames when the user switches between languages, without losing event handlers.
+
+```js
+{
+  morph: ['#nav', '#sidebar']
+}
 ```
 
 ### config.parallel
