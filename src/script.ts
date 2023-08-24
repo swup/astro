@@ -10,6 +10,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		forms = false,
 		globalInstance = false,
 		loadOnIdle = true,
+		morph = false,
 		parallel = false,
 		preload = true,
 		progress = false,
@@ -62,6 +63,11 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		parallel = [];
 	}
 
+	// Disable morph if no containers specified
+	if (!morph || !morph?.length) {
+		morph = false;
+	}
+
 	// Create import statements from requested features
 	// This gets injected into the user's page, so we need to re-export Swup and all plugins
 	// from our own package so that package managers like pnpm can follow the imports correctly
@@ -70,6 +76,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		debug ? 'SwupDebugPlugin' : null,
 		accessibility ? 'SwupA11yPlugin' : null,
 		forms ? 'SwupFormsPlugin' : null,
+		morph ? 'SwupMorphPlugin' : null,
 		preload ? 'SwupPreloadPlugin' : null,
 		progress ? 'SwupProgressPlugin' : null,
 		smoothScrolling ? 'SwupScrollPlugin' : null,
@@ -107,6 +114,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 					${debug ? `new SwupDebugPlugin(),` : ''}
 					${accessibility ? `new SwupA11yPlugin(),` : ''}
 					${forms ? `new SwupFormsPlugin({ formSelector: 'form' }),` : ''}
+					${morph ? `new SwupMorphPlugin({ containers: ${JSON.stringify(morph)} }),` : ''}
 					${preload ? `new SwupPreloadPlugin({ preloadHoveredLinks: ${JSON.stringify(preload.hover)}, preloadVisibleLinks: ${JSON.stringify(preload.visible)} }),` : ''}
 					${progress ? `new SwupProgressPlugin(),` : ''}
 					${routes ? `new SwupRouteNamePlugin({ routes: ${JSON.stringify(routes)}, paths: true }),` : ''}
