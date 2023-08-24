@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.0
+
+- Add support for [morphing container elements](https://github.com/swup/astro#configmorph) in place
+- Add fallback if `requestIdleCallback` is unavailable
+- Restore history index on reload
+
 ## 1.2.1
 
 - Update swup and plugins
