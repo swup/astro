@@ -49,6 +49,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 	} else {
 		preload = { hover: preload, visible: false };
 	}
+
 	// Unset preload if all preload options are disabled
 	if (Object.values(preload).filter(Boolean).length === 0) {
 		preload = false;
@@ -69,7 +70,6 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		morph = false;
 	}
 
-	// Create import statements from requested features
 	// Build plugins + options from requested features
 	const plugins = {
 		SwupDebugPlugin: debug,
@@ -89,9 +89,10 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		SwupOverlayTheme: theme === Theme.overlay ? themeOptions : false,
 	};
 
+	// Only enable plugins that are requested
 	const enabledPlugins = Object.fromEntries(Object.entries(plugins).filter(([, enabled]) => enabled));
 
-	// Create import statements from swup and enabled plugins
+	// Create import statements for swup and enabled plugins
 	// This gets injected into the user's page, so we need to re-export Swup and all plugins
 	// from our own package so that package managers like pnpm can follow the imports correctly
 	const modules = ['Swup', ...Object.keys(enabledPlugins)];
@@ -112,6 +113,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 
 		async function initSwup() {
 			${loadOnIdle ? dynamicImports : ''}
+
 			const swup = new Swup({
 				animationSelector: ${JSON.stringify(animationSelector)},
 				containers: ${JSON.stringify(containers)},
@@ -120,6 +122,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 					${Object.entries(enabledPlugins).map(([plugin, options]) => s`new ${plugin}(${options}),`).join(', ')}
 				]
 			});
+
 			${globalInstance ? 'window.swup = swup;' : ''}
 		}
 
