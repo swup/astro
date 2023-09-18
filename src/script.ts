@@ -119,7 +119,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 				containers: ${JSON.stringify(containers)},
 				cache: ${JSON.stringify(cache)},
 				plugins: [
-					${Object.entries(enabledPlugins).map(([plugin, options]) => s`new ${plugin}(${options}),`).join(', ')}
+					${Object.entries(enabledPlugins).map(([plugin, options]) => s`new ${plugin}(${options})`).join(', ')}
 				]
 			});
 
