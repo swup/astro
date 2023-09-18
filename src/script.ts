@@ -78,7 +78,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		SwupMorphPlugin: morph ? { containers: morph } : false,
 		SwupPreloadPlugin: preload ? { preloadHoveredLinks: preload.hover, preloadVisibleLinks: preload.visible } : false,
 		SwupProgressPlugin: progress,
-		SwupRouteNamePlugin: routes ? { routes: routes, paths: true } : false,
+		SwupRouteNamePlugin: routes ? { routes, paths: true } : false,
 		SwupScrollPlugin: smoothScrolling,
 		SwupParallelPlugin: parallel ? { containers: parallel } : false,
 		SwupBodyClassPlugin: updateBodyClass,
