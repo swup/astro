@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1
+
+- Refactor dynamic imports
+
 ## 1.3.0
 
 - Add support for [morphing container elements](https://github.com/swup/astro#configmorph) in place
