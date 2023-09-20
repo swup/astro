@@ -90,7 +90,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 	};
 
 	// Only enable plugins that are requested
-	const enabledPlugins = Object.fromEntries(Object.entries(plugins).filter(([, enabled]) => enabled));
+	const enabledPlugins = Object.fromEntries(Object.entries(plugins).filter(([, enabled]) => enabled).map(([plugin, options]) => [plugin, options === true ? {} : options]));
 
 	// Create import statements for swup and enabled plugins
 	// This gets injected into the user's page, so we need to re-export Swup and all plugins
