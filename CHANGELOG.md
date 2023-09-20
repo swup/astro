@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.2
+
+- Fix plugin initilisation for a11y-plugin
+
 ## 1.3.1
 
 - Refactor dynamic imports
