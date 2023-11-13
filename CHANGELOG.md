@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.3
+
+- Update swup and plugins
+
 ## 1.3.2
 
 - Fix plugin initilisation for a11y-plugin
