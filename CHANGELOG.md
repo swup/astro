@@ -2,6 +2,8 @@
 
 ## 1.3.4
 
+- Add support for native View Transitions
+- Handle rapid link clicks for smoother transitions
 - Update swup and plugins
 
 ## 1.3.3
