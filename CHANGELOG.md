@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.3.4
+## 1.4.0
 
 - Add support for native View Transitions
 - Handle rapid link clicks for smoother transitions
