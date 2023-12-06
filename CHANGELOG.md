@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.4
+
+- Update swup and plugins
+
 ## 1.3.3
 
 - Update swup and plugins
