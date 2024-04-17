@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.1
+
+- Update swup and plugins
+- Reduce bundle size
+
 ## 1.4.0
 
 - Add support for native View Transitions
