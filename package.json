@@ -1,7 +1,7 @@
 {
   "name": "@swup/astro",
   "description": "Smooth page transitions, smart preloading and more in Astro",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "type": "module",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
@@ -52,7 +52,7 @@
     "@swup/forms-plugin": "^3.0.0",
     "@swup/head-plugin": "^2.0.0",
     "@swup/overlay-theme": "^2.0.0",
-    "@swup/parallel-plugin": "^0.3.0",
+    "@swup/parallel-plugin": "^0.4.0",
     "@swup/preload-plugin": "^3.0.0",
     "@swup/progress-plugin": "^3.0.0",
     "@swup/route-name-plugin": "^4.0.0",
