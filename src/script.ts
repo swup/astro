@@ -123,6 +123,13 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 				]
 			});
 
+			const dispatch = (name) => document.dispatchEvent(new Event(name));
+
+			// Trigger custom events to simulate Astro load lifecycle
+			swup.hooks.before('content:replace', () => dispatch('astro:before-swap'));
+			swup.hooks.on('content:replace', () => dispatch('astro:after-swap'));
+			swup.hooks.on('page:view', () => dispatch('astro:page-load'));
+
 			${globalInstance ? 'window.swup = swup;' : ''}
 		}
 
