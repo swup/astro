@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.0
+
+- Trigger custom events to allow cleanup of Astro Component Islands
+- Avoid memory leaks and other side effects @benjaminrobinet
+- Update swup and plugins
+
 ## 1.4.1
 
 - Update swup and plugins
