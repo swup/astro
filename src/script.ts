@@ -1,5 +1,5 @@
 import { Theme, type ThemeOptions, type Options } from './index.js';
-import { serialiseOptions as s } from './serialise.js';
+import { serialiseOptions as s, serialise } from './serialise.js';
 
 export function buildInitScript(options: Partial<Options> = {}): string {
 	let {
@@ -10,6 +10,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		debug = false,
 		forms = false,
 		globalInstance = false,
+		ignore = null,
 		loadOnIdle = true,
 		morph = false,
 		parallel = false,
@@ -113,6 +114,25 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 
 		async function initSwup() {
 			${loadOnIdle ? dynamicImports : ''}
+
+			const ignore = ${serialise(ignore)};
+			const ignoreVisit = (url, { el, event } = {}) => {
+				if (typeof ignore === 'function') {
+					return ignore(url, { el, event });
+				}
+				if (Array.isArray(ignore)) {
+					return ignore.some((pattern) => {
+						if (typeof pattern === 'string') {
+							return url.includes(pattern);
+						}
+						if (pattern instanceof RegExp) {
+							return pattern.test(url);
+						}
+						return false;
+					});
+				}
+				return false;
+			};
 
 			const swup = new Swup({
 				animationSelector: ${JSON.stringify(animationSelector)},
