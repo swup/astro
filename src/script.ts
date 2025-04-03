@@ -135,12 +135,8 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 				return false;
 			};
 
-			const ignoreVisit = (url, { el, event } = {}) => {
-				return shouldIgnore(ignoreOption, url, { el, event });
-			};
-
 			const swup = new Swup({
-				ignoreVisit: (url, { el, event } = {}) => shouldIgnore(ignoreOption, url, { el, event }),
+				ignoreVisit: (url, { el, event } = {}) => el?.closest('[data-no-swup]') || shouldIgnore(ignoreOption, url, { el, event }),
 				animationSelector: ${JSON.stringify(animationSelector)},
 				containers: ${JSON.stringify(containers)},
 				cache: ${JSON.stringify(cache)},
