@@ -10,6 +10,7 @@ export interface Options {
 	debug: boolean;
 	forms: boolean;
 	globalInstance: boolean;
+	ignore: (string|RegExp)[] | ((url: string, { el, event }: { el?: Element; event?: Event }) => boolean);
 	loadOnIdle: boolean;
 	parallel: boolean | string[];
 	morph: string[] | false;

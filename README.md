@@ -120,6 +120,7 @@ export default defineConfig({
       cache: true,
       preload: true,
       accessibility: true,
+      ignore: null,
       forms: false,
       morph: false,
       parallel: false,
@@ -245,6 +246,35 @@ content after page visits.
 ```js
 {
   accessibility: true
+}
+```
+
+### config.ignore
+
+Tell swup to ignore certain links. This is useful for links that should always trigger a full reload,
+like links to an admin panel or links you know will download files. The default is to accept all
+links unless they are marked with a `data-no-swup` attribute.
+
+The ignore option accepts either an array of strings/regexps or a function that returns a boolean:
+
+- Regular expressions are matched against the url, e.g. `/\.pdf$/i`
+- Strings starting with a slash are matched against the beginning of the url, e.g. `/admin`
+- All other strings are used as CSS selectors and match against the clicked element, e.g. `a[download]`
+- Functions receive the url as well as the element and event that triggered the visit
+
+```js
+{
+  ignore: [
+    /\.pdf$/i,
+    '/admin',
+    'a[download]',
+  ]
+}
+```
+
+```js
+{
+  ignore: (url, { el, event }) => event.shiftKey
 }
 ```
 

@@ -1,5 +1,5 @@
 import { Theme, type ThemeOptions, type Options } from './index.js';
-import { serialiseOptions as s } from './serialise.js';
+import { serialiseOptions as s, serialise } from './serialise.js';
 
 export function buildInitScript(options: Partial<Options> = {}): string {
 	let {
@@ -10,6 +10,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		debug = false,
 		forms = false,
 		globalInstance = false,
+		ignore = null,
 		loadOnIdle = true,
 		morph = false,
 		parallel = false,
@@ -114,7 +115,28 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		async function initSwup() {
 			${loadOnIdle ? dynamicImports : ''}
 
+			const ignoreOption = ${serialise(ignore)};
+			const shouldIgnore = (ignore, url, { el, event }) => {
+				if (typeof ignore === 'string' && ignore.startsWith('/')) {
+					return url.startsWith(ignore);
+				}
+				if (typeof ignore === 'string') {
+					return el?.matches(ignore) ?? false;
+				}
+				if (ignore instanceof RegExp) {
+					return ignore.test(url);
+				}
+				if (typeof ignore === 'function') {
+					return ignore(url, { el, event });
+				}
+				if (Array.isArray(ignore)) {
+					return ignore.some((i) => shouldIgnore(i, url, { el, event }));
+				}
+				return false;
+			};
+
 			const swup = new Swup({
+				ignoreVisit: (url, { el, event } = {}) => el?.closest('[data-no-swup]') || shouldIgnore(ignoreOption, url, { el, event }),
 				animationSelector: ${JSON.stringify(animationSelector)},
 				containers: ${JSON.stringify(containers)},
 				cache: ${JSON.stringify(cache)},
