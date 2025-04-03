@@ -115,26 +115,32 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		async function initSwup() {
 			${loadOnIdle ? dynamicImports : ''}
 
-			const ignore = ${serialise(ignore)};
-			const ignoreVisit = (url, { el, event } = {}) => {
+			const ignoreOption = ${serialise(ignore)};
+			const shouldIgnore = (ignore, url, { el, event }) => {
+				if (typeof ignore === 'string' && ignore.startsWith('/')) {
+					return url.startsWith(ignore);
+				}
+				if (typeof ignore === 'string') {
+					return el?.matches(ignore) ?? false;
+				}
+				if (ignore instanceof RegExp) {
+					return ignore.test(url);
+				}
 				if (typeof ignore === 'function') {
 					return ignore(url, { el, event });
 				}
 				if (Array.isArray(ignore)) {
-					return ignore.some((pattern) => {
-						if (typeof pattern === 'string') {
-							return url.includes(pattern);
-						}
-						if (pattern instanceof RegExp) {
-							return pattern.test(url);
-						}
-						return false;
-					});
+					return ignore.some((i) => shouldIgnore(i, url, { el, event }));
 				}
 				return false;
 			};
 
+			const ignoreVisit = (url, { el, event } = {}) => {
+				return shouldIgnore(ignoreOption, url, { el, event });
+			};
+
 			const swup = new Swup({
+				ignoreVisit: (url, { el, event } = {}) => shouldIgnore(ignoreOption, url, { el, event }),
 				animationSelector: ${JSON.stringify(animationSelector)},
 				containers: ${JSON.stringify(containers)},
 				cache: ${JSON.stringify(cache)},
