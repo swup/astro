@@ -1,7 +1,7 @@
 {
   "name": "@swup/astro",
   "description": "Smooth page transitions, smart preloading and more in Astro",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "type": "module",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
@@ -45,7 +45,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@swup/a11y-plugin": "^4.0.0",
+    "@swup/a11y-plugin": "^5.0.0",
     "@swup/body-class-plugin": "^3.0.0",
     "@swup/debug-plugin": "^4.0.0",
     "@swup/fade-theme": "^2.0.0",
@@ -63,7 +63,7 @@
     "swup-morph-plugin": "^1.0.0"
   },
   "devDependencies": {
-    "astro": "^2.0.0",
-    "typescript": "^5.0.0"
+    "astro": "^3.0.0",
+    "typescript": "^5.8.2"
   }
 }

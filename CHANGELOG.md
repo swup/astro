@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.0
+
+- Update a11y plugin for improved screenreader support
+- Add `ignore` option for controlling which links swup can follow
+
 ## 1.5.0
 
 - Trigger custom events to allow cleanup of Astro Component Islands
