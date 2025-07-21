@@ -152,7 +152,9 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 			swup.hooks.on('content:replace', () => dispatch('astro:after-swap'));
 			swup.hooks.on('page:view', () => dispatch('astro:page-load'));
 
-			${globalInstance ? 'window.swup = swup;' : ''}
+			${globalInstance
+				? `window.swup = swup; ${loadOnIdle ? `dispatch('astro:swup-ready');` : ''}`
+				: ''}
 		}
 
 		${loadOnIdle ? 'onIdleAfterLoad(initSwup);' : 'initSwup();'}
