@@ -1,6 +1,7 @@
 import { type AstroIntegration } from 'astro';
 
 import { buildInitScript } from './script.js';
+import type { Rule as FragmentRule } from '@swup/fragment-plugin';
 
 export interface Options {
 	accessibility: boolean;
@@ -9,6 +10,7 @@ export interface Options {
 	containers: string[];
 	debug: boolean;
 	forms: boolean;
+	fragments: null | FragmentRule[];
 	globalInstance: boolean;
 	ignore: (string|RegExp)[] | ((url: string, { el, event }: { el?: Element; event?: Event }) => boolean);
 	loadOnIdle: boolean;
