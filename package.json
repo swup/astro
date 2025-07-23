@@ -50,6 +50,7 @@
     "@swup/debug-plugin": "^4.0.0",
     "@swup/fade-theme": "^2.0.0",
     "@swup/forms-plugin": "^3.0.0",
+    "@swup/fragment-plugin": "^1.1.2",
     "@swup/head-plugin": "^2.0.0",
     "@swup/overlay-theme": "^2.0.0",
     "@swup/parallel-plugin": "^0.4.0",

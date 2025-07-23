@@ -315,6 +315,30 @@ To disable swup for specific forms, add a `data-no-swup` attribute on the form e
 <form action="/" data-no-swup>
 ```
 
+### config.fragments
+
+In most cases, you'll want to replace the same containers on every page visit. Sometimes, however, you need to replace only a subset of containers, or even different containers on different pages.
+To do so, you can define a list of fragment rules that tell swup which containers to replace on which pages.
+
+Fragments are a powerful feature for advanced use cases. Please refer to the [Fragment Plugin documentation](https://swup.js.org/plugins/fragment-plugin/) for details and examples.
+
+```js
+{
+  fragments: [
+    {
+      from: '/overview/',
+      to: '/detail/:id',
+      containers: ['#modal']
+    },
+    {
+      from: '/detail/:id',
+      to: '/overview/',
+      containers: ['#modal']
+    }
+  ]
+}
+```
+
 ### config.morph
 
 Morph certain containers into the new page without replacing them entirely. Uses
