@@ -107,14 +107,9 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 
 	// Create swup init code from requested features
 
-	return `
-		import { deserialise } from '@swup/astro/serialise';
-		${loadOnIdle ? `import { onIdleAfterLoad } from '@swup/astro/idle';` : ''}
-		${!loadOnIdle ? staticImports : ''}
-
-		async function initSwup() {
-			${loadOnIdle ? dynamicImports : ''}
-
+	let ignoreCode = '';
+	if (ignore !== null) {
+		ignoreCode = `
 			const ignoreOption = ${serialise(ignore)};
 			const shouldIgnore = (ignore, url, { el, event }) => {
 				if (typeof ignore === 'string' && ignore.startsWith('/')) {
@@ -134,9 +129,20 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 				}
 				return false;
 			};
+		`;
+	}
+
+	return `
+		import { deserialise } from '@swup/astro/serialise';
+		${loadOnIdle ? `import { onIdleAfterLoad } from '@swup/astro/idle';` : ''}
+		${!loadOnIdle ? staticImports : ''}
+
+		async function initSwup() {
+			${loadOnIdle ? dynamicImports : ''}
+			${ignoreCode}
 
 			const swup = new Swup({
-				ignoreVisit: (url, { el, event } = {}) => el?.closest('[data-no-swup]') || shouldIgnore(ignoreOption, url, { el, event }),
+				ignoreVisit: (url, { el, event } = {}) => el?.closest('[data-no-swup]')${ignoreCode ? ` || shouldIgnore(ignoreOption, url, { el, event })` : ''},
 				animationSelector: ${JSON.stringify(animationSelector)},
 				containers: ${JSON.stringify(containers)},
 				cache: ${JSON.stringify(cache)},
