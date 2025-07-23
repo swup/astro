@@ -14,6 +14,7 @@ export interface Options {
 	loadOnIdle: boolean;
 	parallel: boolean | string[];
 	morph: string[] | false;
+	native: boolean;
 	preload: boolean | { hover: boolean; visible: boolean };
 	progress: boolean;
 	reloadScripts: boolean;
