@@ -14,6 +14,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		ignore = null,
 		loadOnIdle = true,
 		morph = false,
+		native = false,
 		parallel = false,
 		preload = true,
 		progress = false,
@@ -148,6 +149,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 				animationSelector: ${JSON.stringify(animationSelector)},
 				containers: ${JSON.stringify(containers)},
 				cache: ${JSON.stringify(cache)},
+				native: ${JSON.stringify(native)},
 				plugins: [
 					${Object.entries(enabledPlugins).map(([plugin, options]) => s`new ${plugin}(${options})`).join(', ')}
 				]

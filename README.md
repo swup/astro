@@ -88,6 +88,34 @@ html.is-animating .transition-fade {
 }
 ```
 
+### Native view transitions
+
+For best performance in browsers that support it, you can enable swup's native mode and define animations using the [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API).
+
+```js
+export default defineConfig({
+  integrations: [
+    swup({ theme: false, native: true })
+  ]
+});
+```
+
+```css
+html.is-changing .transition-fade {
+  view-transition-name: main;
+}
+::view-transition-old(main) {
+  animation: fade 0.5s ease-in-out both;
+}
+::view-transition-new(main) {
+  animation: fade 0.5s ease-in-out both reverse;
+}
+@keyframes fade {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+```
+
 ### Usage without animations
 
 If you don't need animated page transitions and just want to use swup for its preloading and caching
