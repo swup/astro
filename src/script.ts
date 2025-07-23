@@ -133,7 +133,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 	}
 
 	return `
-		${ignoreCode ? `import { deserialise } from '@swup/astro/serialise';` : ''}
+		import { deserialise } from '@swup/astro/serialise';
 		${loadOnIdle ? `import { onIdleAfterLoad } from '@swup/astro/idle';` : ''}
 		${!loadOnIdle ? staticImports : ''}
 
