@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.0
+
+- Add support for replacing dynamic fragments
+- Add option for native mode View Transitions
+- Optimize client script when not using ignore option (@aleclarson)
+
 ## 1.6.0
 
 - Update a11y plugin for improved screenreader support
@@ -8,7 +14,7 @@
 ## 1.5.0
 
 - Trigger custom events to allow cleanup of Astro Component Islands
-- Avoid memory leaks and other side effects @benjaminrobinet
+- Avoid memory leaks and other side effects (@benjaminrobinet)
 - Update swup and plugins
 
 ## 1.4.1
