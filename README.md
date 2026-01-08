@@ -157,6 +157,7 @@ export default defineConfig({
       smoothScrolling: true,
       updateBodyClass: false,
       updateHead: true,
+      persistAssets: false,
       reloadScripts: true,
       debug: false,
       loadOnIdle: true,
@@ -481,6 +482,17 @@ stylesheets per section of your site.
 ```js
 {
   updateHead: true
+}
+```
+
+### config.persistAssets
+
+Whether to keep orphaned link, style and script tags from the old page that weren't included on the
+new page. Useful for third-party libraries that add custom styles but can only be run once.
+
+```js
+{
+  persistAssets: true
 }
 ```
 

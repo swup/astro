@@ -17,6 +17,7 @@ export interface Options {
 	parallel: boolean | string[];
 	morph: string[] | false;
 	native: boolean;
+	persistAssets: boolean;
 	preload: boolean | { hover: boolean; visible: boolean };
 	progress: boolean;
 	reloadScripts: boolean;
