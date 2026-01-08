@@ -158,6 +158,7 @@ export default defineConfig({
       updateBodyClass: false,
       updateHead: true,
       persistAssets: false,
+      persistTags: false,
       reloadScripts: true,
       debug: false,
       loadOnIdle: true,
@@ -487,12 +488,30 @@ stylesheets per section of your site.
 
 ### config.persistAssets
 
-Whether to keep orphaned link, style and script tags from the old page that weren't included on the
-new page. Useful for third-party libraries that add custom styles but can only be run once.
+Whether to keep orphaned `link`, `style` and `script` tags from the old page
+that weren't included on the new page. Useful for third-party libraries that
+add custom styles but can only be run once.
+
+Defaults to `false`, i.e. orphaned assets will be removed.
+
+Setting it to `true` acts as a shortcut for setting the `persistTags` option to
+a selector of `link[rel=stylesheet], script[src], style`.
 
 ```js
 {
   persistAssets: true
+}
+```
+
+### config.persistTags
+
+Define which tags will be persisted when a new page is loaded.
+
+Defaults to `false`, i.e. all orphaned tags will be removed.
+
+```js
+{
+  persistTags: 'style[data-keep-style]'
 }
 ```
 

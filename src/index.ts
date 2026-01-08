@@ -18,6 +18,7 @@ export interface Options {
 	morph: string[] | false;
 	native: boolean;
 	persistAssets: boolean;
+	persistTags: string[] | false;
 	preload: boolean | { hover: boolean; visible: boolean };
 	progress: boolean;
 	reloadScripts: boolean;
