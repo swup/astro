@@ -157,6 +157,8 @@ export default defineConfig({
       smoothScrolling: true,
       updateBodyClass: false,
       updateHead: true,
+      persistAssets: false,
+      persistTags: false,
       reloadScripts: true,
       debug: false,
       loadOnIdle: true,
@@ -476,11 +478,63 @@ styling site sections.
 ### config.updateHead
 
 Update the contents of the `head` tag after each page visit. Useful if you have differing
-stylesheets per section of your site.
+stylesheets per section of your site, or if you need to keep any meta tags and assets from the next page to the current document.
+Enabled by default.
 
 ```js
 {
-  updateHead: true
+  updateHead: {
+    awaitAssets: true,
+    persistAssets: false,
+    persistTags: false
+  }
+}
+```
+
+#### config.updateHead.awaitAssets
+
+Setting this to `true` will delay the transition to the new page until all newly
+added assets have finished loading, imitating the standard browser behavior of render-blocking requests. Currently only supports stylesheets.
+Enabled by default.
+
+```js
+{
+  updateHead: {
+    awaitAssets: true
+  }
+}
+```
+
+#### config.updateHead.persistAssets
+
+Whether to keep orphaned `link`, `style` and `script` tags from the old page
+that weren't included on the new page. Useful for third-party libraries that
+add custom styles but can only be run once.
+
+Defaults to `false`, i.e. orphaned assets will be removed.
+
+Setting it to `true` acts as a shortcut for setting the `persistTags` option to
+a selector of `link[rel=stylesheet], script[src], style`.
+
+```js
+{
+  updateHead: {
+    persistAssets: true
+  }
+}
+```
+
+#### config.updateHead.persistTags
+
+Define which tags will be persisted when a new page is loaded.
+
+Defaults to `false`, i.e. all orphaned tags will be removed.
+
+```js
+{
+  updateHead: {
+    persistTags: 'style[data-keep-style]'
+  }
 }
 ```
 

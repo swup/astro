@@ -24,7 +24,7 @@ export interface Options {
 	smoothScrolling: boolean;
 	theme: Theme | [Theme, ThemeOptions] | false;
 	updateBodyClass: boolean;
-	updateHead: boolean;
+	updateHead: boolean | { awaitAssets?: boolean; persistAssets?: boolean; persistTags?: string | false };
 }
 
 export enum Theme {

@@ -73,6 +73,13 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		morph = false;
 	}
 
+	// Allow updateHead boolean to enable per-feature configuration
+	if (typeof updateHead === 'object') {
+		updateHead = { awaitAssets: updateHead.awaitAssets ?? true, persistAssets: updateHead.persistAssets ?? false, persistTags: updateHead.persistTags ?? false };
+	} else {
+		updateHead = { awaitAssets: updateHead, persistAssets: false, persistTags: false };
+	}
+
 	// Build plugins + options from requested features
 	const plugins = {
 		SwupDebugPlugin: debug,
@@ -86,7 +93,7 @@ export function buildInitScript(options: Partial<Options> = {}): string {
 		SwupScrollPlugin: smoothScrolling,
 		SwupParallelPlugin: parallel ? { containers: parallel } : false,
 		SwupBodyClassPlugin: updateBodyClass,
-		SwupHeadPlugin: updateHead ? { awaitAssets: true } : false,
+		SwupHeadPlugin: updateHead ? { awaitAssets: updateHead.awaitAssets, persistAssets: updateHead.persistAssets, persistTags: updateHead.persistTags } : false,
 		SwupScriptsPlugin: reloadScripts,
 		SwupFadeTheme: theme === Theme.fade ? themeOptions : false,
 		SwupSlideTheme: theme === Theme.slide ? themeOptions : false,
