@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.0
+
+- Allow customizing head plugin options (@ethrx)
+
 ## 1.7.0
 
 - Add support for replacing dynamic fragments
