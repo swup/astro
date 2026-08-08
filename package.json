@@ -64,7 +64,7 @@
     "swup-morph-plugin": "^1.0.0"
   },
   "devDependencies": {
-    "astro": "^3.0.0",
     "typescript": "^5.8.2"
+    "astro": "^7.0.0",
   }
 }
