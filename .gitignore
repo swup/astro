@@ -8,3 +8,5 @@ Thumbs.db
 .idea
 .vscode
 /dist
+/test/fixtures/*/dist
+/test/fixtures/*/.astro
