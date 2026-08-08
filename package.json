@@ -63,6 +63,9 @@
     "swup": "^4.0.0",
     "swup-morph-plugin": "^1.0.0"
   },
+  "peerDependencies": {
+    "astro": "^5.0.0 || ^6.0.0 || ^7.0.0"
+  },
   "devDependencies": {
     "typescript": "^5.8.2"
     "astro": "^7.0.0",
